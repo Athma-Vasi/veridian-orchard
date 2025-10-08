@@ -7,6 +7,7 @@ import {
 } from '@shopify/hydrogen';
 import type {HeaderQuery, CartApiQueryFragment} from 'storefrontapi.generated';
 import {useAside} from '~/components/Aside';
+import {Menu} from 'lucide-react';
 
 interface HeaderProps {
   header: HeaderQuery;
@@ -81,7 +82,7 @@ export function Header({
           {/* mobile logo (550 and below) */}
           <div
             className={`hidden max-[500px]:block text-center border-b border-gray-100 transition-all duration-300 ease-in-out ${
-              isScrolled ? 'py-2' : 'py-3'
+              isScrolled ? 'py-1' : 'py-2'
             }`}
           >
             <NavLink
@@ -92,6 +93,38 @@ export function Header({
             >
               <h1 className="font-medium my-0">Veridian Orchard</h1>
             </NavLink>
+          </div>
+
+          {/* header content */}
+          <div
+            className={`flex items-center justify-between px-4 sm:px-6 transition-all duration-500 ease-in-out ${
+              isScrolled ? 'py-2' : 'sm:py-4'
+            }`}
+          >
+            {/* mobile menu toggle */}
+            <div className="lg:hidden">
+              <HeaderMenuMobileToggle />
+            </div>
+
+            {/* logo (above 550px) */}
+            <NavLink
+              prefetch="intent"
+              to="/"
+              className={`font-lora tracking-wider text-center max-[550px]:hidden absolute left-1/2 translate-x-1/2 lg:static lg:translate-x-0 lg:Text-left transition-all duration-300 ease-in-out 
+              ${isScrolled ? 'text-lg' : 'text-2xl'}`}
+            >
+              <h1 className="font-medium">Veridian Orchard</h1>
+            </NavLink>
+
+            {/* desktop navigation */}
+            <div className="hidden lg:block flex-1 px-8">
+              <HeaderMenu
+                menu={menu}
+                viewport="desktop"
+                primaryDomainUrl={header.shop.primaryDomain.url}
+                publicStoreDomain={publicStoreDomain}
+              />
+            </div>
           </div>
         </div>
       </header>
@@ -128,45 +161,148 @@ export function HeaderMenu({
   const className = `header-menu-${viewport}`;
   const {close} = useAside();
 
-  return (
-    <nav className={className} role="navigation">
-      {viewport === 'mobile' && (
-        <NavLink
-          end
-          onClick={close}
-          prefetch="intent"
-          style={activeLinkStyle}
-          to="/"
-        >
-          Home
-        </NavLink>
-      )}
-      {(menu || FALLBACK_HEADER_MENU).items.map((item) => {
-        if (!item.url) return null;
+  const baseClassName =
+    "transition-all duration-200 hover:text-brand-accent font-source relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-brand-accent after:transition-all after:duration-200 hover:after:w-full";
+  const desktopClassName =
+    'flex items-center justify-center space-x-12 txt-sm uppercase tracking-wider';
+  const mobileClassName = 'flex flex-col px-6';
 
-        // if the url is internal, we strip the domain
-        const url =
-          item.url.includes('myshopify.com') ||
-          item.url.includes(publicStoreDomain) ||
-          item.url.includes(primaryDomainUrl)
-            ? new URL(item.url).pathname
-            : item.url;
-        return (
-          <NavLink
-            className="header-menu-item"
-            end
-            key={item.id}
-            onClick={close}
-            prefetch="intent"
-            style={activeLinkStyle}
-            to={url}
-          >
-            {item.title}
-          </NavLink>
-        );
-      })}
+  if (menu === null || menu === undefined || menu.items.length === 0) {
+    return null;
+  }
+
+  return (
+    <nav
+      className={viewport === 'desktop' ? desktopClassName : mobileClassName}
+      role="navigation"
+    >
+      {/* mobile */}
+      {viewport === 'mobile' && (
+        <>
+          {/* mobile nav links */}
+          <div className="space-y-6 py-4">
+            {(menu || FALLBACK_HEADER_MENU).items.map((item) => {
+              if (!item.url) return null;
+
+              // if the url is internal, we strip the domain
+              const url =
+                // development store
+                item.url.includes('myshopify.com') ||
+                // custom domain
+                // veridian-orchard.com/collections
+                item.url.includes(publicStoreDomain) ||
+                // primary domain
+                // store.veridian-orchard.com/collections
+                item.url.includes(primaryDomainUrl)
+                  ? // internal link - strip the domain
+                    // /collections
+                    new URL(item.url).pathname
+                  : // external link - leave the url as is
+                    // ex: to parner link : https://partners.shopify.com/123456
+                    item.url;
+
+              return (
+                <NavLink
+                  className={({isActive}) =>
+                    `${baseClassName} ${isActive ? 'text-brand-accent' : 'text-black'}`
+                  }
+                  // end is used to apply active styles only when the path matches exactly
+                  end
+                  key={item.id}
+                  onClick={close}
+                  prefetch="intent"
+                  to={url}
+                >
+                  {item.title}
+                </NavLink>
+              );
+            })}
+          </div>
+
+          {/* mobile footer links */}
+        </>
+      )}
+
+      {/* desktop */}
+      {viewport === 'desktop' &&
+        (menu || FALLBACK_HEADER_MENU).items.map((item) => {
+          if (!item.url) return null;
+
+          // if the url is internal, we strip the domain
+          const url =
+            // development store
+            item.url.includes('myshopify.com') ||
+            // custom domain
+            // veridian-orchard.com/collections
+            item.url.includes(publicStoreDomain) ||
+            // primary domain
+            // store.veridian-orchard.com/collections
+            item.url.includes(primaryDomainUrl)
+              ? // internal link - strip the domain
+                // /collections
+                new URL(item.url).pathname
+              : // external link - leave the url as is
+                // ex: to parner link : https://partners.shopify.com/123456
+                item.url;
+
+          return (
+            <NavLink
+              className={({isActive}) =>
+                `${baseClassName} ${isActive ? 'text-brand-accent after:w-full' : 'text-black'}`
+              }
+              // end is used to apply active styles only when the path matches exactly
+              end
+              key={item.id}
+              onClick={close}
+              prefetch="intent"
+              to={url}
+            >
+              {item.title}
+            </NavLink>
+          );
+        })}
     </nav>
   );
+
+  // return (
+  //   <nav className={className} role="navigation">
+  //     {viewport === 'mobile' && (
+  //       <NavLink
+  //         end
+  //         onClick={close}
+  //         prefetch="intent"
+  //         style={activeLinkStyle}
+  //         to="/"
+  //       >
+  //         Home
+  //       </NavLink>
+  //     )}
+  //     {(menu || FALLBACK_HEADER_MENU).items.map((item) => {
+  //       if (!item.url) return null;
+
+  //       // if the url is internal, we strip the domain
+  //       const url =
+  //         item.url.includes('myshopify.com') ||
+  //         item.url.includes(publicStoreDomain) ||
+  //         item.url.includes(primaryDomainUrl)
+  //           ? new URL(item.url).pathname
+  //           : item.url;
+  //       return (
+  //         <NavLink
+  //           className="header-menu-item"
+  //           end
+  //           key={item.id}
+  //           onClick={close}
+  //           prefetch="intent"
+  //           style={activeLinkStyle}
+  //           to={url}
+  //         >
+  //           {item.title}
+  //         </NavLink>
+  //       );
+  //     })}
+  //   </nav>
+  // );
 }
 
 function HeaderCtas({
@@ -193,10 +329,10 @@ function HeaderMenuMobileToggle() {
   const {open} = useAside();
   return (
     <button
-      className="header-menu-mobile-toggle reset"
+      className="p-2 -ml-2 hover:text-brand-accent transition-colors duration-200"
       onClick={() => open('mobile')}
     >
-      <h3>☰</h3>
+      <Menu className="w-6 h-6" />
     </button>
   );
 }
