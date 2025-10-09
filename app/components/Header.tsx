@@ -7,7 +7,7 @@ import {
 } from '@shopify/hydrogen';
 import type {HeaderQuery, CartApiQueryFragment} from 'storefrontapi.generated';
 import {useAside} from '~/components/Aside';
-import {Menu} from 'lucide-react';
+import {Menu, Search, ShoppingBag, User} from 'lucide-react';
 
 interface HeaderProps {
   header: HeaderQuery;
@@ -125,6 +125,11 @@ export function Header({
                 publicStoreDomain={publicStoreDomain}
               />
             </div>
+
+            {/* header call to actions */}
+            <div className="flex items-center">
+              <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
+            </div>
           </div>
         </div>
       </header>
@@ -204,7 +209,7 @@ export function HeaderMenu({
               return (
                 <NavLink
                   className={({isActive}) =>
-                    `${baseClassName} ${isActive ? 'text-brand-accent' : 'text-black'}`
+                    `${baseClassName} text-lg py-2 block ${isActive ? 'text-brand-accent' : 'text-black'}`
                   }
                   // end is used to apply active styles only when the path matches exactly
                   end
@@ -220,6 +225,29 @@ export function HeaderMenu({
           </div>
 
           {/* mobile footer links */}
+          <div className="mt-auto border-t border-gray-100 py-6">
+            <div className="space-y-4">
+              <NavLink
+                to="/account"
+                className="flex items-center space-x-2 text-brand-accent hover:text-brand-highlight transition-colors duration-200 ease-in-out"
+                onClick={close}
+                prefetch="intent"
+              >
+                <User className="w-5 h-5" />
+                <span className="font-worksans text-base">Account</span>
+              </NavLink>
+
+              <button
+                onClick={() => {
+                  close();
+                }}
+                className="flex items-center space-x-2 text-brand-accent hover:text-brand-highlight transition-colors duration-200 ease-in-out"
+              >
+                <Search className="w-5 h-5" />
+                <span className="font-worksans text-base">Search</span>
+              </button>
+            </div>
+          </div>
         </>
       )}
 
@@ -310,19 +338,36 @@ function HeaderCtas({
   cart,
 }: Pick<HeaderProps, 'isLoggedIn' | 'cart'>) {
   return (
-    <nav className="header-ctas" role="navigation">
-      <HeaderMenuMobileToggle />
-      <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
-        <Suspense fallback="Sign in">
-          <Await resolve={isLoggedIn} errorElement="Sign in">
-            {(isLoggedIn) => (isLoggedIn ? 'Account' : 'Sign in')}
-          </Await>
-        </Suspense>
-      </NavLink>
+    <nav
+      className="flex items-center space-x-2 sm:space-x-3 lg:space-x-8"
+      role="navigation"
+    >
       <SearchToggle />
+      <NavLink
+        prefetch="intent"
+        to="/account"
+        className="flex items-center space-x-2 text-brand-accent hover:text-brand-highlight transition-colors duration-200 ease-in-out"
+      >
+        <User className="w-5 h-5" />
+        <span className="sr-only">Account</span>
+      </NavLink>
       <CartToggle cart={cart} />
     </nav>
   );
+  // return (
+  //   <nav className="header-ctas" role="navigation">
+  //     <HeaderMenuMobileToggle />
+  //     <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
+  //       <Suspense fallback="Sign in">
+  //         <Await resolve={isLoggedIn} errorElement="Sign in">
+  //           {(isLoggedIn) => (isLoggedIn ? 'Account' : 'Sign in')}
+  //         </Await>
+  //       </Suspense>
+  //     </NavLink>
+  //     <SearchToggle />
+  //     <CartToggle cart={cart} />
+  //   </nav>
+  // );
 }
 
 function HeaderMenuMobileToggle() {
@@ -340,8 +385,11 @@ function HeaderMenuMobileToggle() {
 function SearchToggle() {
   const {open} = useAside();
   return (
-    <button className="reset" onClick={() => open('search')}>
-      Search
+    <button
+      className="p-2 hover:text-brand-highlight transition-colors duration-200 ease-in-out"
+      onClick={() => open('search')}
+    >
+      <Search className="w-6 h-6" />
     </button>
   );
 }
@@ -351,10 +399,9 @@ function CartBadge({count}: {count: number | null}) {
   const {publish, shop, cart, prevCart} = useAnalytics();
 
   return (
-    <a
-      href="/cart"
-      onClick={(e) => {
-        e.preventDefault();
+    <button
+      className="relative p-2 hover:text-brand-highlight transition-colors duration-200 ease-in-out"
+      onClick={() => {
         open('cart');
         publish('cart_viewed', {
           cart,
@@ -364,9 +411,37 @@ function CartBadge({count}: {count: number | null}) {
         } as CartViewPayload);
       }}
     >
-      Cart {count === null ? <span>&nbsp;</span> : count}
-    </a>
+      <ShoppingBag className="w-5 h-5" />
+      {count !== null && count > 0 && (
+        <span className="absolute -top-1 -right-1 bg-brand-accent text-white rounded-full text-xs w-5 h-5 flex items-center justify-center font-worksans">
+          {count > 9 ? '9+' : count}
+        </span>
+      )}
+      {count === 0 && (
+        <span className="absolute -top-1 -right-1 bg-gray-300 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center font-worksans">
+          0
+        </span>
+      )}
+    </button>
   );
+
+  // return (
+  //   <a
+  //     href="/cart"
+  //     onClick={(e) => {
+  //       e.preventDefault();
+  //       open('cart');
+  //       publish('cart_viewed', {
+  //         cart,
+  //         prevCart,
+  //         shop,
+  //         url: window.location.href || '',
+  //       } as CartViewPayload);
+  //     }}
+  //   >
+  //     Cart {count === null ? <span>&nbsp;</span> : count}
+  //   </a>
+  // );
 }
 
 function CartToggle({cart}: Pick<HeaderProps, 'cart'>) {
