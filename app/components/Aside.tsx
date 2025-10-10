@@ -85,11 +85,7 @@ export function Aside({
   return (
     <div
       aria-modal
-      className={`fixed inset-0 z-60 transition-opacity duration-300 ease-in-out ${
-        expanded
-          ? 'opacity-100 pointer-events-auto'
-          : 'opacity-0 pointer-events-none'
-      } overlay ${expanded ? 'expanded' : ''}`}
+      className={`overlay ${expanded ? 'expanded' : ''}`}
       role="dialog"
     >
       <button className="close-outside" onClick={close} />

@@ -28,6 +28,7 @@
   --color-background: oklch(99.64% 0.007 132.8);
   --color-accent: oklch(78.58% 0.119 63.8);
   --color-text: oklch(39.14% 0 0);
+  --color-highlight: oklch(87% 0.179 74.4);
 
   --header-height: 64px;
   --announcement-header-height: 32px;
@@ -162,7 +163,8 @@ img {
 
 .navlink,
 .search-toggle-cta,
-.footer-button-mobile {
+.footer-button-mobile,
+.cart-badge-cta {
   position: relative;
   text-decoration: none;
   width: fit-content;
@@ -170,12 +172,14 @@ img {
 }
 .navlink:hover,
 .search-toggle-cta:hover,
-.footer-button-mobile:hover {
+.footer-button-mobile:hover,
+.cart-badge-cta:hover {
   color: var(--color-primary);
 }
 .navlink::after,
 .search-toggle-cta::after,
-.footer-button-mobile::after {
+.footer-button-mobile::after,
+.cart-badge-cta::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -189,7 +193,8 @@ img {
 }
 .navlink:hover::after,
 .search-toggle-cta:hover::after,
-.footer-button-mobile:hover::after {
+.footer-button-mobile:hover::after,
+.cart-badge-cta:hover::after {
   visibility: visible;
   transform: scaleX(1);
 }
@@ -411,6 +416,144 @@ img {
 
 /*
 * --------------------------------------------------
+* components/cart/CartEmpty
+* --------------------------------------------------
+*/
+
+.cart-empty-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--padding);
+  text-align: center;
+  padding: var(--padding) 1rem;
+
+  .icon-wrapper {
+    padding-bottom: var(--padding);
+    font-size: 4rem;
+    position: relative;
+
+    .icon-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: var(--color-text);
+      border-radius: 100%;
+      padding: 1rem;
+      background-color: var(--color-highlight);
+
+      .icon {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+  }
+
+  .cart-empty-content {
+    font-weight: 400;
+    color: var(--color-text);
+    padding-top: var(--padding);
+
+    h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(
+        var(--font-heading-min-size),
+        3vw,
+        var(--font-heading-max-size)
+      );
+    }
+
+    p {
+      font-family: var(--font-sans);
+      font-size: clamp(
+        var(--font-body-min-size),
+        1.5vw,
+        var(--font-body-max-size)
+      );
+      margin: 0;
+    }
+  }
+
+  .cart-empty-cta {
+    display: inline-block;
+    background: var(--color-primary);
+    color: var(--color-light);
+    font-family: var(--font-sans);
+    font-size: clamp(
+      var(--font-subheading-min-size),
+      1.15vw,
+      var(--font-subheading-max-size)
+    );
+    font-weight: 600;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 4px;
+    transition: background 200ms ease-in-out;
+  }
+  .cart-empty-cta:hover {
+    background: var(--color-accent);
+  }
+
+  .collections-all-cta {
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+
+    p {
+      font-family: var(--font-sans);
+      font-size: clamp(
+        var(--font-body-min-size),
+        1.5vw,
+        var(--font-body-max-size)
+      );
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    .link {
+      font-size: clamp(
+        var(--font-subheading-min-size),
+        1.15vw,
+        var(--font-subheading-max-size)
+      );
+      font-weight: 500;
+      color: var(--color-text);
+      text-decoration: none;
+      transition: color 200ms ease-in-out;
+    }
+  }
+
+  .contact-info {
+    padding-top: 2rem;
+    font-family: var(--font-sans);
+    font-size: clamp(
+      var(--font-body-min-size),
+      1.5vw,
+      var(--font-body-max-size)
+    );
+    font-weight: 300;
+    color: var(--color-text);
+
+    p:first-child {
+      margin: 0.25rem 0;
+      font-family: var(--font-sans);
+      font-weight: 500;
+    }
+    p:last-child {
+      margin: 0;
+      color: var(--color-primary);
+      font-weight: 300;
+    }
+  }
+}
+
+/*
+* --------------------------------------------------
 * components/Aside
 * --------------------------------------------------
 */
@@ -448,7 +591,7 @@ aside header .close {
   font-weight: bold;
   opacity: 0.8;
   text-decoration: none;
-  transition: all 200ms;
+  transition: all 200ms ease-in-out;
   width: 20px;
 }
 
