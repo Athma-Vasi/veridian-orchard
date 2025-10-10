@@ -26,19 +26,24 @@ export function CartLineItem({
   const {close} = useAside();
 
   return (
-    <li key={id} className="cart-line">
+    <div className="cart-line-item-wrapper">
+      {/* product image */}
       {image && (
-        <Image
-          alt={title}
-          aspectRatio="1/1"
-          data={image}
-          height={100}
-          loading="lazy"
-          width={100}
-        />
+        <div className="image-container">
+          <Image
+            alt={title}
+            aspectRatio="1/1"
+            className="image"
+            data={image}
+            height={100}
+            loading="lazy"
+            width={100}
+          />
+        </div>
       )}
 
-      <div>
+      {/* product details */}
+      <div className="cart-line-item-details">
         <Link
           prefetch="intent"
           to={lineItemUrl}
@@ -48,12 +53,11 @@ export function CartLineItem({
             }
           }}
         >
-          <p>
-            <strong>{product.title}</strong>
-          </p>
+          <h3>{product.title}</h3>
         </Link>
-        <ProductPrice price={line?.cost?.totalAmount} />
-        <ul>
+
+        {/* product options */}
+        <ul className="product-options">
           {selectedOptions.map((option) => (
             <li key={option.name}>
               <small>
@@ -62,10 +66,57 @@ export function CartLineItem({
             </li>
           ))}
         </ul>
-        <CartLineQuantity line={line} />
+
+        {/* price & quantity */}
+        <div className="price-quantity">
+          <ProductPrice price={line?.cost?.totalAmount} />
+          <CartLineQuantity line={line} />
+        </div>
       </div>
-    </li>
+    </div>
   );
+
+  // return (
+  //   <li key={id} className="cart-line">
+  //     {image && (
+  //       <Image
+  //         alt={title}
+  //         aspectRatio="1/1"
+  //         data={image}
+  //         height={100}
+  //         loading="lazy"
+  //         width={100}
+  //       />
+  //     )}
+
+  //     <div>
+  //       <Link
+  //         prefetch="intent"
+  //         to={lineItemUrl}
+  //         onClick={() => {
+  //           if (layout === 'aside') {
+  //             close();
+  //           }
+  //         }}
+  //       >
+  //         <p>
+  //           <strong>{product.title}</strong>
+  //         </p>
+  //       </Link>
+  //       <ProductPrice price={line?.cost?.totalAmount} />
+  //       <ul>
+  //         {selectedOptions.map((option) => (
+  //           <li key={option.name}>
+  //             <small>
+  //               {option.name}: {option.value}
+  //             </small>
+  //           </li>
+  //         ))}
+  //       </ul>
+  //       <CartLineQuantity line={line} />
+  //     </div>
+  //   </li>
+  // );
 }
 
 /**
