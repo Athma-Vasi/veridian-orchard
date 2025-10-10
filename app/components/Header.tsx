@@ -98,9 +98,8 @@ export function Header({
             </div>
 
             {/* header call to actions */}
-            <div className="header-ctas-wrapper">
-              <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
-            </div>
+
+            <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
           </div>
         </div>
       </header>
@@ -134,14 +133,7 @@ export function HeaderMenu({
   viewport: Viewport;
   publicStoreDomain: HeaderProps['publicStoreDomain'];
 }) {
-  const className = `header-menu-${viewport}`;
   const {close} = useAside();
-
-  const baseClassName =
-    "transition-all duration-200 hover:text-brand-accent font-source relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-brand-accent after:transition-all after:duration-200 hover:after:w-full";
-  const desktopClassName =
-    'flex items-center justify-center space-x-12 txt-sm uppercase tracking-wider';
-  const mobileClassName = 'flex flex-col px-6';
 
   if (menu === null || menu === undefined || menu.items.length === 0) {
     return null;
@@ -149,14 +141,18 @@ export function HeaderMenu({
 
   return (
     <nav
-      className={viewport === 'desktop' ? desktopClassName : mobileClassName}
+      className={
+        viewport === 'desktop'
+          ? 'main-header-nav-desktop'
+          : 'main-header-nav-mobile'
+      }
       role="navigation"
     >
       {/* mobile */}
       {viewport === 'mobile' && (
         <>
           {/* mobile nav links */}
-          <div className="space-y-6 py-4">
+          <div className="navlinks-mobile">
             {(menu || FALLBACK_HEADER_MENU).items.map((item) => {
               if (!item.url) return null;
 
@@ -180,7 +176,8 @@ export function HeaderMenu({
               return (
                 <NavLink
                   className={({isActive}) =>
-                    `${baseClassName} text-lg py-2 block ${isActive ? 'text-brand-accent' : 'text-black'}`
+                    // `${baseClassName} text-lg py-2 block ${isActive ? 'text-brand-accent' : 'text-black'}`
+                    `navlink navlink-mobile ${isActive ? 'active' : ''}`
                   }
                   // end is used to apply active styles only when the path matches exactly
                   end
@@ -196,70 +193,75 @@ export function HeaderMenu({
           </div>
 
           {/* mobile footer links */}
-          <div className="mt-auto border-t border-gray-100 py-6">
-            <div className="space-y-4">
-              <NavLink
-                to="/account"
-                className="flex items-center space-x-2 text-brand-accent hover:text-brand-highlight transition-colors duration-200 ease-in-out"
-                onClick={close}
-                prefetch="intent"
-              >
+          <div className="footer-navlinks-mobile">
+            <NavLink
+              to="/account"
+              className="navlink navlink-mobile"
+              onClick={close}
+              prefetch="intent"
+            >
+              <div className="navlink-icon-text">
                 <User className="w-5 h-5" />
-                <span className="font-worksans text-base">Account</span>
-              </NavLink>
+                <span className="navlink-text">Account</span>
+              </div>
+            </NavLink>
 
-              <button
-                onClick={() => {
-                  close();
-                }}
-                className="flex items-center space-x-2 text-brand-accent hover:text-brand-highlight transition-colors duration-200 ease-in-out"
-              >
+            <button
+              onClick={() => {
+                close();
+              }}
+              className="footer-button-mobile"
+            >
+              <div className="button-icon-text">
                 <Search className="w-5 h-5" />
-                <span className="font-worksans text-base">Search</span>
-              </button>
-            </div>
+                <span className="button-text">Search</span>
+              </div>
+            </button>
           </div>
         </>
       )}
 
       {/* desktop */}
-      {viewport === 'desktop' &&
-        (menu || FALLBACK_HEADER_MENU).items.map((item) => {
-          if (!item.url) return null;
+      {viewport === 'desktop' && (
+        <div className="navlinks-desktop">
+          {(menu || FALLBACK_HEADER_MENU).items.map((item) => {
+            if (!item.url) return null;
 
-          // if the url is internal, we strip the domain
-          const url =
-            // development store
-            item.url.includes('myshopify.com') ||
-            // custom domain
-            // veridian-orchard.com/collections
-            item.url.includes(publicStoreDomain) ||
-            // primary domain
-            // store.veridian-orchard.com/collections
-            item.url.includes(primaryDomainUrl)
-              ? // internal link - strip the domain
-                // /collections
-                new URL(item.url).pathname
-              : // external link - leave the url as is
-                // ex: to parner link : https://partners.shopify.com/123456
-                item.url;
+            // if the url is internal, we strip the domain
+            const url =
+              // development store
+              item.url.includes('myshopify.com') ||
+              // custom domain
+              // veridian-orchard.com/collections
+              item.url.includes(publicStoreDomain) ||
+              // primary domain
+              // store.veridian-orchard.com/collections
+              item.url.includes(primaryDomainUrl)
+                ? // internal link - strip the domain
+                  // /collections
+                  new URL(item.url).pathname
+                : // external link - leave the url as is
+                  // ex: to parner link : https://partners.shopify.com/123456
+                  item.url;
 
-          return (
-            <NavLink
-              className={({isActive}) =>
-                `${baseClassName} ${isActive ? 'text-brand-accent after:w-full' : 'text-black'}`
-              }
-              // end is used to apply active styles only when the path matches exactly
-              end
-              key={item.id}
-              onClick={close}
-              prefetch="intent"
-              to={url}
-            >
-              {item.title}
-            </NavLink>
-          );
-        })}
+            return (
+              <NavLink
+                className={({isActive}) =>
+                  `navlink navlink-desktop ${isActive ? 'active' : ''}`
+                }
+                // end is used to apply active styles only when the path matches exactly
+                end
+                key={item.id}
+                onClick={close}
+                prefetch="intent"
+                to={url}
+              >
+                {item.title}
+              </NavLink>
+            );
+          })}
+        </div>
+      )}
     </nav>
   );
 
@@ -309,18 +311,27 @@ function HeaderCtas({
   cart,
 }: Pick<HeaderProps, 'isLoggedIn' | 'cart'>) {
   return (
-    <nav
-      className="flex items-center space-x-2 sm:space-x-3 lg:space-x-8"
-      role="navigation"
-    >
+    <nav className="header-ctas" role="navigation">
+      {/* <HeaderMenuMobileToggle /> */}
       <SearchToggle />
-      <NavLink
-        prefetch="intent"
-        to="/account"
-        className="flex items-center space-x-2 text-brand-accent hover:text-brand-highlight transition-colors duration-200 ease-in-out"
-      >
-        <User className="w-5 h-5" />
-        <span className="sr-only">Account</span>
+      <NavLink prefetch="intent" to="/account" className="navlink account-cta">
+        <Suspense fallback="Sign in">
+          <Await resolve={isLoggedIn} errorElement="Sign in">
+            {(isLoggedIn) =>
+              isLoggedIn ? (
+                <>
+                  <User className="w-6 h-6" />
+                  <span className="accessible-hidden">Account</span>
+                </>
+              ) : (
+                <>
+                  <User className="w-6 h-6" />
+                  <span className="accessible-hidden">Sign in</span>
+                </>
+              )
+            }
+          </Await>
+        </Suspense>
       </NavLink>
       <CartToggle cart={cart} />
     </nav>
@@ -345,7 +356,7 @@ function HeaderMenuMobileToggle() {
   const {open} = useAside();
   return (
     <button
-      className="header-menu-mobile-toggle p-2 -ml-2 hover:text-brand-accent transition-colors duration-200"
+      className="header-menu-mobile-toggle"
       onClick={() => open('mobile')}
     >
       <Menu className="w-6 h-6" />
@@ -356,10 +367,7 @@ function HeaderMenuMobileToggle() {
 function SearchToggle() {
   const {open} = useAside();
   return (
-    <button
-      className="p-2 hover:text-brand-highlight transition-colors duration-200 ease-in-out"
-      onClick={() => open('search')}
-    >
+    <button className="search-toggle-cta" onClick={() => open('search')}>
       <Search className="w-6 h-6" />
     </button>
   );
@@ -371,7 +379,7 @@ function CartBadge({count}: {count: number | null}) {
 
   return (
     <button
-      className="relative p-2 hover:text-brand-highlight transition-colors duration-200 ease-in-out"
+      className="cart-badge-cta"
       onClick={() => {
         open('cart');
         publish('cart_viewed', {
@@ -382,17 +390,11 @@ function CartBadge({count}: {count: number | null}) {
         } as CartViewPayload);
       }}
     >
-      <ShoppingBag className="w-5 h-5" />
+      <ShoppingBag className="w-6 h-6" />
       {count !== null && count > 0 && (
-        <span className="absolute -top-1 -right-1 bg-brand-accent text-white rounded-full text-xs w-5 h-5 flex items-center justify-center font-worksans">
-          {count > 9 ? '9+' : count}
-        </span>
+        <span className="badge">{count > 9 ? '9+' : count}</span>
       )}
-      {count === 0 && (
-        <span className="absolute -top-1 -right-1 bg-gray-300 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center font-worksans">
-          0
-        </span>
-      )}
+      {count === 0 && <span className="badge">0</span>}
     </button>
   );
 
