@@ -3,13 +3,46 @@
   --cart-aside-summary-height-with-discount: 300px;
   --cart-aside-summary-height: 250px;
   --grid-item-width: 355px;
-  --header-height: 64px;
+
+  --padding: clamp(1rem, 2.5vw, 1.7rem);
+
+  --font-sans: 'Work Sans', sans-serif;
+  --font-serif: 'Lora', serif;
+  --font-announcement-min-size: 1rem;
+  --font-announcement-max-size: 1.7rem;
+  --font-mobile-logo-min-size: 1.25rem;
+  --font-mobile-logo-max-size: 1.5rem;
+  --font-desktop-logo-min-size: 1.5rem;
+  --font-desktop-logo-max-size: 2rem;
+  --font-body-min-size: 1rem;
+  --font-body-max-size: 1.125rem;
+  --font-heading-min-size: 1.5rem;
+  --font-heading-max-size: 2.25rem;
+  --font-subheading-min-size: 1.25rem;
+  --font-subheading-max-size: 1.5rem;
+
   --color-dark: #000;
   --color-light: #fff;
+  --color-primary: oklch(46.06% 0.088 116.1);
+  --color-secondary: oklch(76.11% 0.076 138);
+  --color-background: oklch(99.64% 0.007 132.8);
+  --color-accent: oklch(78.58% 0.119 63.8);
+  --color-text: oklch(39.14% 0 0);
+
+  --header-height: 64px;
+  --announcement-header-height: 32px;
 }
 
 img {
   border-radius: 4px;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  width: 100%;
 }
 
 /*
@@ -20,6 +53,142 @@ img {
 .link:hover {
   text-decoration: underline;
   cursor: pointer;
+}
+
+/*
+* --------------------------------------------------
+* components/Header
+* --------------------------------------------------
+*/
+
+.header-wrapper {
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  transition: transform 500ms ease-in-out;
+}
+.header-wrapper.scrolled {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: var(--color-light);
+}
+
+.announcement-header-wrapper {
+  overflow: hidden;
+  transition: all 500ms ease-in-out;
+  background: var(--color-accent);
+  color: var(--color-light);
+}
+.announcement-header-wrapper.scrolled {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  opacity: 0;
+  transition:
+    max-height 500ms ease-in-out,
+    opacity 300ms ease-in-out,
+    padding 300ms ease-in-out;
+  overflow: hidden;
+}
+
+.announcement-header {
+  font-family: var(--font-sans);
+  font-size: clamp(
+    var(--font-announcement-min-size),
+    1.5vw,
+    var(--font-announcement-max-size)
+  );
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+  margin: 0;
+  padding: var(--padding) 0px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.main-header-wrapper {
+  border-bottom: 1px solid var(--color-dark);
+  transition: all 500ms ease-in-out;
+  background: var(--color-light);
+}
+
+.main-header-content {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: var(--padding) 1rem;
+  transition: all 500ms ease-in-out;
+}
+
+.main-header-nav-wrapper {
+  flex: 1;
+  padding: 0 2rem;
+}
+
+.desktop-logo-navlink {
+  text-align: center;
+}
+
+.desktop-logo {
+  font-family: var(--font-serif);
+  font-size: clamp(
+    var(--font-desktop-logo-min-size),
+    2.5vw,
+    var(--font-desktop-logo-max-size)
+  );
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+  text-decoration: none;
+  color: var(--color-dark);
+}
+
+.mobile-logo-navlink {
+  text-align: center;
+}
+
+.mobile-logo {
+  font-family: var(--font-serif);
+  font-size: clamp(
+    var(--font-mobile-logo-min-size),
+    2.5vw,
+    var(--font-mobile-logo-max-size)
+  );
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+  text-decoration: none;
+  color: var(--color-dark);
+}
+
+@media (max-width: 550px) {
+  .mobile-logo {
+    border-bottom: 1px solid var(--color-dark);
+    transition: all 300ms ease-in-out;
+    padding: 0.5rem 0;
+  }
+}
+@media (min-width: 551px) {
+  .mobile-logo {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .header-menu-mobile-toggle {
+    display: block;
+  }
+}
+@media (min-width: 1025px) {
+  .header-menu-mobile-toggle {
+    display: none;
+  }
+}
+
+.header-ctas-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 /*
@@ -144,7 +313,7 @@ button.reset {
   font-size: inherit;
 }
 
-button.reset>* {
+button.reset > * {
   margin: 0;
 }
 

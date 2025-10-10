@@ -2,6 +2,7 @@ import {Suspense, useEffect, useState} from 'react';
 import {Await, NavLink, useAsyncValue} from 'react-router';
 import {
   type CartViewPayload,
+  Image,
   useAnalytics,
   useOptimisticCart,
 } from '@shopify/hydrogen';
@@ -56,68 +57,38 @@ export function Header({
   }, [isScrolled, lastScrollY, asideType]);
 
   return (
-    <div
-      className={`fixed w-full z-40 transition-transform duration-500 ease-in-out
-       ${isScrolled && !isScrollingUp && asideType == 'closed' ? 'translate-y-full' : 'translate-y-0'}
-      `}
-    >
+    <div className={`header-wrapper ${isScrolled ? 'scrolled' : ''}`}>
       {/* announcement bar */}
       <div
-        className={`overflow-hidden transition-all duration-500 ease-in-out bg-brand-accent text-white ${
-          isScrolled ? 'max-h-0' : 'max-h-12'
-        }`}
+        className={`announcement-header-wrapper ${isScrolled ? 'scrolled' : ''}`}
       >
-        <div className="container mx-auto text-center py-2 px-4">
-          <p className="font-worksans text-[13px] leading-tight sm:text-sm font-light tracking-wider">
+        <div className="container">
+          <p className="announcement-header">
             Complimentary shipping on orders over $200!
           </p>
         </div>
       </div>
 
       {/* main header */}
-      <header
-        className={`transition-all duration-500 ease-in-out ${isScrolled ? 'bg-white-80 backdrop-blur-lg shadow-sm border-transparent' : 'bg-white border-gray-100'}`}
-      >
-        <div className="container mx-auto">
+      <header className="main-header-wrapper">
+        <div className="container">
           {/* mobile logo (550 and below) */}
-          <div
-            className={`hidden max-[500px]:block text-center border-b border-gray-100 transition-all duration-300 ease-in-out ${
-              isScrolled ? 'py-1' : 'py-2'
-            }`}
-          >
-            <NavLink
-              prefetch="intent"
-              to="/"
-              className={'font-lora text-2xl tracking-normal inline-block'}
-              end
-            >
-              <h1 className="font-medium my-0">Veridian Orchard</h1>
-            </NavLink>
-          </div>
+          <NavLink prefetch="intent" to="/" className="mobile-logo-navlink" end>
+            <h1 className="mobile-logo">Veridian Orchard</h1>
+          </NavLink>
 
           {/* header content */}
-          <div
-            className={`flex items-center justify-between px-4 sm:px-6 transition-all duration-500 ease-in-out ${
-              isScrolled ? 'py-2' : 'sm:py-4'
-            }`}
-          >
+          <div className="main-header-content">
             {/* mobile menu toggle */}
-            <div className="lg:hidden">
-              <HeaderMenuMobileToggle />
-            </div>
+            <HeaderMenuMobileToggle />
 
             {/* logo (above 550px) */}
-            <NavLink
-              prefetch="intent"
-              to="/"
-              className={`font-lora tracking-wider text-center max-[550px]:hidden absolute left-1/2 translate-x-1/2 lg:static lg:translate-x-0 lg:Text-left transition-all duration-300 ease-in-out 
-              ${isScrolled ? 'text-lg' : 'text-2xl'}`}
-            >
-              <h1 className="font-medium">Veridian Orchard</h1>
+            <NavLink prefetch="intent" to="/" className="desktop-logo-navlink">
+              <h1 className="desktop-logo">Veridian Orchard</h1>
             </NavLink>
 
             {/* desktop navigation */}
-            <div className="hidden lg:block flex-1 px-8">
+            <div className="main-header-nav-wrapper">
               <HeaderMenu
                 menu={menu}
                 viewport="desktop"
@@ -127,7 +98,7 @@ export function Header({
             </div>
 
             {/* header call to actions */}
-            <div className="flex items-center">
+            <div className="header-ctas-wrapper">
               <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
             </div>
           </div>
@@ -374,7 +345,7 @@ function HeaderMenuMobileToggle() {
   const {open} = useAside();
   return (
     <button
-      className="p-2 -ml-2 hover:text-brand-accent transition-colors duration-200"
+      className="header-menu-mobile-toggle p-2 -ml-2 hover:text-brand-accent transition-colors duration-200"
       onClick={() => open('mobile')}
     >
       <Menu className="w-6 h-6" />

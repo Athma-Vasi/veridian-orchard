@@ -36,26 +36,60 @@ export function Aside({
   const expanded = type === activeType;
 
   useEffect(() => {
-    const abortController = new AbortController();
-
-    if (expanded) {
-      document.addEventListener(
-        'keydown',
-        function handler(event: KeyboardEvent) {
-          if (event.key === 'Escape') {
-            close();
-          }
-        },
-        {signal: abortController.signal},
-      );
+    if (!expanded) {
+      return;
     }
-    return () => abortController.abort();
+
+    // store scroll position
+    const scrollY = window.scrollY;
+
+    // get original body styles
+    const originalStyles = {
+      overflow: document.body.style.overflow,
+      position: document.body.style.position,
+      top: document.body.style.top,
+      width: document.body.style.width,
+      height: document.body.style.height,
+    };
+
+    // prevent scrolling while aside is open
+    document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = '100%';
+    document.body.style.height = '100%';
+
+    const abortController = new AbortController();
+    document.addEventListener(
+      'keydown',
+      function handler(event: KeyboardEvent) {
+        if (event.key === 'Escape') {
+          close();
+        }
+      },
+      {signal: abortController.signal},
+    );
+
+    return () => {
+      // restore scroll position
+      document.body.style.overflow = originalStyles.overflow;
+      document.body.style.position = originalStyles.position;
+      document.body.style.top = originalStyles.top;
+      document.body.style.width = originalStyles.width;
+      document.body.style.height = originalStyles.height;
+      window.scrollTo(0, scrollY);
+      abortController.abort();
+    };
   }, [close, expanded]);
 
   return (
     <div
       aria-modal
-      className={`overlay ${expanded ? 'expanded' : ''}`}
+      className={`fixed inset-0 z-60 transition-opacity duration-300 ease-in-out ${
+        expanded
+          ? 'opacity-100 pointer-events-auto'
+          : 'opacity-0 pointer-events-none'
+      } overlay ${expanded ? 'expanded' : ''}`}
       role="dialog"
     >
       <button className="close-outside" onClick={close} />
