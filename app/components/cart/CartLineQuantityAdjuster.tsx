@@ -61,11 +61,12 @@ function CartLineQuantityAdjuster({line}: CartLineQuantityAdjusterProps) {
         </button>
       </CartLineUpdateButton>
 
-      <CartLineRemoveButton />
+      <CartLineRemoveButton
+        lineIds={[lineId]}
+        disabled={isOptimistic === true}
+      ></CartLineRemoveButton>
     </div>
   );
-
-  return null;
 }
 
 export default CartLineQuantityAdjuster;
