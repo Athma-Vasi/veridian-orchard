@@ -688,6 +688,57 @@ img {
 
 /*
 * --------------------------------------------------
+* components/AddToCartButton
+* --------------------------------------------------
+*/
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.add-to-cart-button {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--color-primary);
+  color: var(--color-light);
+  font-family: var(--font-sans);
+  font-size: clamp(
+    var(--font-subheading-min-size),
+    1.15vw,
+    var(--font-subheading-max-size)
+  );
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: 4px;
+  transition: background 200ms ease-in-out;
+  width: fit-content;
+
+  .loader {
+    width: 1rem;
+    height: 1rem;
+    color: var(--color-light);
+    animation: spin 1s linear infinite;
+  }
+}
+.add-to-cart-button:hover {
+  background: var(--color-accent);
+}
+.add-to-cart-button:disabled,
+.add-to-cart-button[aria-disabled='true'] {
+  background: gray;
+  cursor: not-allowed;
+}
+
+/*
+* --------------------------------------------------
 * components/Aside
 * --------------------------------------------------
 */

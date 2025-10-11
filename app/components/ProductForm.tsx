@@ -105,7 +105,7 @@ export function ProductForm({
       })}
       <AddToCartButton
         // disabled={!selectedVariant || !selectedVariant.availableForSale}
-        onClick={() => {
+        afterAddToCart={() => {
           open('cart');
         }}
         lines={
