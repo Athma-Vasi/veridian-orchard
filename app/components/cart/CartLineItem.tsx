@@ -70,8 +70,8 @@ export function CartLineItem({
 
         {/* price & quantity */}
         <div className="price-quantity">
-          <ProductPrice price={line?.cost?.totalAmount} />
           <CartLineQuantityAdjuster line={line} />
+          <ProductPrice price={line?.cost?.totalAmount} />
         </div>
       </div>
     </div>

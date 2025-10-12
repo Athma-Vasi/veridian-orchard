@@ -33,12 +33,8 @@ function CartLineUpdateButton({children, lines}: CartLineUpdateButtonProps) {
         // loading state
         if (updating) {
           return (
-            <div className="cart-loading-state-wrapper ">
-              <div className="plus-minus-icons">{children}</div>
-
-              <div className="loader-container">
-                <Loader2 className="loader" />
-              </div>
+            <div className="loader-container">
+              <Loader2 className="loader" />
             </div>
           );
         }
