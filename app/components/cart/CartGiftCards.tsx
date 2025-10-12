@@ -1,5 +1,14 @@
 import {Money, CartForm} from '@shopify/hydrogen';
-import {useRef, useEffect} from 'react';
+import {
+  CalendarDays,
+  CardSim,
+  Gift,
+  IdCard,
+  Loader2,
+  Ticket,
+  WalletCards,
+} from 'lucide-react';
+import {useRef, useEffect, useState} from 'react';
 import {useFetcher, type FetcherWithComponents} from 'react-router';
 import type {CartApiQueryFragment} from 'storefrontapi.generated';
 
@@ -8,65 +17,156 @@ function CartGiftCard({
 }: {
   giftCardCodes: CartApiQueryFragment['appliedGiftCards'] | undefined;
 }) {
+  const [showInput, setShowInput] = useState(false);
   const appliedGiftCardCodes = useRef<string[]>([]);
-  const giftCardCodeInput = useRef<HTMLInputElement>(null);
-  const giftCardAddFetcher = useFetcher({key: 'gift-card-add'});
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  // Clear the gift card code input after the gift card is added
-  useEffect(() => {
-    if (giftCardAddFetcher.data) {
-      giftCardCodeInput.current!.value = '';
-    }
-  }, [giftCardAddFetcher.data]);
+  const codes: string[] =
+    giftCardCodes?.map(({lastCharacters}) => `···· ${lastCharacters}`) ?? [];
 
   function saveAppliedCode(code: string) {
+    if (!inputRef.current) {
+      return;
+    }
+
     const formattedCode = code.replace(/\s/g, ''); // Remove spaces
     if (!appliedGiftCardCodes.current.includes(formattedCode)) {
       appliedGiftCardCodes.current.push(formattedCode);
     }
+    inputRef.current.value = '';
+    setShowInput(false);
   }
 
   return (
-    <div>
-      {/* Display applied gift cards with individual remove buttons */}
-      {giftCardCodes && giftCardCodes.length > 0 && (
-        <dl>
-          <dt>Applied Gift Card(s)</dt>
-          {giftCardCodes.map((giftCard) => (
-            <RemoveGiftCardForm key={giftCard.id} giftCardId={giftCard.id}>
-              <div className="cart-discount">
-                <code>***{giftCard.lastCharacters}</code>
-                &nbsp;
-                <Money data={giftCard.amountUsed} />
-                &nbsp;
-                <button type="submit">Remove</button>
-              </div>
-            </RemoveGiftCardForm>
-          ))}
-        </dl>
-      )}
+    <div className="cart-gift-cards">
+      {/* applied discounts */}
+      {codes.length > 0 && <dl></dl>}
 
-      {/* Show an input to apply a gift card */}
-      <UpdateGiftCardForm
-        giftCardCodes={appliedGiftCardCodes.current}
-        saveAppliedCode={saveAppliedCode}
-        fetcherKey="gift-card-add"
-      >
-        <div>
-          <input
-            type="text"
-            name="giftCardCode"
-            placeholder="Gift card code"
-            ref={giftCardCodeInput}
-          />
-          &nbsp;
-          <button type="submit" disabled={giftCardAddFetcher.state !== 'idle'}>
-            Apply
-          </button>
-        </div>
-      </UpdateGiftCardForm>
+      {/* discount input */}
+      {showInput ? (
+        <UpdateGiftCardForm
+          giftCardCodes={appliedGiftCardCodes.current}
+          saveAppliedCode={saveAppliedCode}
+        >
+          {(fetcher) => {
+            // handle loading state
+            const isLoading = fetcher.state !== 'idle';
+
+            return (
+              <div className="apply-discount">
+                <div className="input-container">
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    name="giftCardCode"
+                    placeholder="Enter Gift Card Code"
+                    defaultValue=""
+                    disabled={isLoading}
+                  />
+                  {isLoading ? (
+                    <div className="loader-container">
+                      <Loader2 className="loader" />
+                    </div>
+                  ) : null}
+                </div>
+
+                <div className="button-container">
+                  <button
+                    type="submit"
+                    disabled={isLoading}
+                    onClick={() => {
+                      // focus input after applying discount
+                      if (inputRef.current) {
+                        inputRef.current.focus();
+                      }
+                    }}
+                  >
+                    Apply
+                  </button>
+
+                  {/* cancel button */}
+                  <button
+                    type="button"
+                    className="cancel-button"
+                    onClick={() => setShowInput(false)}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            );
+          }}
+        </UpdateGiftCardForm>
+      ) : (
+        <button
+          className="show-input-button"
+          onClick={() => setShowInput(true)}
+        >
+          <WalletCards /> <span>Add Gift Cards</span>
+        </button>
+      )}
     </div>
   );
+
+  // const appliedGiftCardCodes = useRef<string[]>([]);
+  // const giftCardCodeInput = useRef<HTMLInputElement>(null);
+  // const giftCardAddFetcher = useFetcher({key: 'gift-card-add'});
+
+  // // Clear the gift card code input after the gift card is added
+  // useEffect(() => {
+  //   if (giftCardAddFetcher.data) {
+  //     giftCardCodeInput.current!.value = '';
+  //   }
+  // }, [giftCardAddFetcher.data]);
+
+  // function saveAppliedCode(code: string) {
+  //   const formattedCode = code.replace(/\s/g, ''); // Remove spaces
+  //   if (!appliedGiftCardCodes.current.includes(formattedCode)) {
+  //     appliedGiftCardCodes.current.push(formattedCode);
+  //   }
+  // }
+
+  // return (
+  //   <div>
+  //     {/* Display applied gift cards with individual remove buttons */}
+  //     {giftCardCodes && giftCardCodes.length > 0 && (
+  //       <dl>
+  //         <dt>Applied Gift Card(s)</dt>
+  //         {giftCardCodes.map((giftCard) => (
+  //           <RemoveGiftCardForm key={giftCard.id} giftCardId={giftCard.id}>
+  //             <div className="cart-discount">
+  //               <code>***{giftCard.lastCharacters}</code>
+  //               &nbsp;
+  //               <Money data={giftCard.amountUsed} />
+  //               &nbsp;
+  //               <button type="submit">Remove</button>
+  //             </div>
+  //           </RemoveGiftCardForm>
+  //         ))}
+  //       </dl>
+  //     )}
+
+  //     {/* Show an input to apply a gift card */}
+  //     <UpdateGiftCardForm
+  //       giftCardCodes={appliedGiftCardCodes.current}
+  //       saveAppliedCode={saveAppliedCode}
+  //       fetcherKey="gift-card-add"
+  //     >
+  //       <div>
+  //         <input
+  //           type="text"
+  //           name="giftCardCode"
+  //           placeholder="Gift card code"
+  //           ref={giftCardCodeInput}
+  //         />
+  //         &nbsp;
+  //         <button type="submit" disabled={giftCardAddFetcher.state !== 'idle'}>
+  //           Apply
+  //         </button>
+  //       </div>
+  //     </UpdateGiftCardForm>
+  //   </div>
+  // );
 }
 
 function UpdateGiftCardForm({
@@ -78,7 +178,9 @@ function UpdateGiftCardForm({
   giftCardCodes?: string[];
   saveAppliedCode?: (code: string) => void;
   fetcherKey?: string;
-  children: React.ReactNode;
+  children:
+    | React.ReactNode
+    | ((fetcher: FetcherWithComponents<any>) => React.ReactNode);
 }) {
   return (
     <CartForm
@@ -94,7 +196,8 @@ function UpdateGiftCardForm({
         if (code && saveAppliedCode) {
           saveAppliedCode(code as string);
         }
-        return children;
+
+        return typeof children === 'function' ? children(fetcher) : children;
       }}
     </CartForm>
   );

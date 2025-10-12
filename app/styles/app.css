@@ -715,6 +715,7 @@ img {
   padding: 1rem;
   border-top: 1px solid oklch(86.47% 0.013 234.6);
   font-family: var(--font-sans);
+  gap: 2rem;
 
   .subtotals {
     display: flex;
@@ -736,10 +737,10 @@ img {
     }
   }
 
-  .cart-discounts {
+  .cart-discounts,
+  .cart-gift-cards {
     .apply-discount {
       display: flex;
-      outline: 1px solid blue;
       gap: 1rem;
 
       .input-container {

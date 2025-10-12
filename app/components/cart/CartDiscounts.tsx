@@ -1,6 +1,7 @@
 import {CartForm} from '@shopify/hydrogen';
 import {Loader2, Ticket} from 'lucide-react';
 import {useState, useRef} from 'react';
+import type {FetcherWithComponents} from 'react-router-dom';
 import type {CartApiQueryFragment} from 'storefrontapi.generated';
 
 function CartDiscounts({
@@ -65,7 +66,6 @@ function CartDiscounts({
                     type="button"
                     className="cancel-button"
                     onClick={() => setShowInput(false)}
-                    disabled={isLoading}
                   >
                     Cancel
                   </button>
@@ -118,7 +118,9 @@ function UpdateDiscountForm({
   children,
 }: {
   discountCodes?: string[];
-  children: React.ReactNode | ((fetcher: any) => React.ReactNode);
+  children:
+    | React.ReactNode
+    | ((fetcher: FetcherWithComponents<any>) => React.ReactNode);
 }) {
   return (
     <CartForm
