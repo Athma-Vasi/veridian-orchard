@@ -46,6 +46,7 @@ export function PageLayout({
         />
       )}
       <main>{children}</main>
+      232323
       <Footer
         footer={footer}
         header={header}

@@ -1,6 +1,14 @@
-import { Suspense } from 'react';
-import { Await, NavLink } from 'react-router';
-import type { FooterQuery, HeaderQuery } from 'storefrontapi.generated';
+import {
+  Facebook,
+  Instagram,
+  Linkedin,
+  Mail,
+  MapIcon,
+  Phone,
+} from 'lucide-react';
+import {Suspense} from 'react';
+import {Await, Form, NavLink} from 'react-router';
+import type {FooterQuery, HeaderQuery} from 'storefrontapi.generated';
 
 interface FooterProps {
   footer: Promise<FooterQuery | null>;
@@ -17,15 +25,153 @@ export function Footer({
     <Suspense>
       <Await resolve={footerPromise}>
         {(footer) => (
-          <footer className="footer">
-            {footer?.menu && header.shop.primaryDomain?.url && (
-              <FooterMenu
-                menu={footer.menu}
-                primaryDomainUrl={header.shop.primaryDomain.url}
-                publicStoreDomain={publicStoreDomain}
-              />
-            )}
-          </footer>
+          <div className="footer">
+            {/* newsletter signup */}
+            <div className="newsletter-signup">
+              <h2>Join the Veridian Family. Get Rooted with Us!</h2>
+              <p>The First Bloom: New Arrivals & Secret Sales, Delivered.</p>
+              <Form className="form">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  required
+                />
+                <button type="submit">Subscribe</button>
+              </Form>
+            </div>
+
+            {/* main footer */}
+            <div className="main-container">
+              {/* brand column */}
+              <div className="brand-column">
+                <h2>Veridian Orchard</h2>
+                <p>
+                  At Veridian Orchard, we cultivate more than just plants; we
+                  nurture a community rooted in sustainability, quality, and
+                  care. Our mission is to bring the freshest, most vibrant
+                  plants from our orchard to your abode, while championing
+                  eco-friendly practices that honor the earth.
+                </p>
+
+                <div className="social-icons">
+                  <a
+                    href="https://www.example.com/veridianorchard/"
+                    className="instagram"
+                    aria-label="Instagram"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Instagram />
+                  </a>
+
+                  <a
+                    href="https://www.example.com/veridianorchard/"
+                    className="facebook"
+                    aria-label="Facebook"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Facebook />
+                  </a>
+
+                  <a
+                    href="https://www.example.com/veridianorchard/"
+                    className="linkedin"
+                    aria-label="LinkedIn"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Linkedin />
+                  </a>
+                </div>
+              </div>
+
+              {/* contact column */}
+              <div className="contact-column">
+                <h2>Contact Us</h2>
+
+                <div className="address">
+                  <MapIcon />
+                  <p>
+                    123 Greenhouse Lane
+                    <br />
+                    Edmonton, AB T5A 0A1
+                    <br />
+                    Canada
+                  </p>
+                </div>
+
+                <div className="phone">
+                  <Phone />
+                  <p>
+                    Phone: <a href="tel:+1234567890">(123) 456-7890</a>
+                  </p>
+                </div>
+
+                <div className="email">
+                  <Mail />
+                  <p>
+                    Email:{' '}
+                    <a href="mailto:support@veridian-orchard.com">
+                      support@veridian-orchard.com
+                    </a>
+                  </p>
+                </div>
+              </div>
+
+              {/* quick links column */}
+              <div className="quick-links-column">
+                <h2>Quick Links</h2>
+                <ul>
+                  <li>
+                    <NavLink to="/collections/all" style={activeLinkStyle}>
+                      Products
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="pages/our-craft" style={activeLinkStyle}>
+                      Our Craft
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="pages/care-guide" style={activeLinkStyle}>
+                      Care Guide
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="pages/about-us" style={activeLinkStyle}>
+                      About Us
+                    </NavLink>
+                  </li>
+                </ul>
+              </div>
+
+              {/* policies column */}
+              <div className="policies-column">
+                <h2>Policies</h2>
+                {footer?.menu && header.shop.primaryDomain?.url ? (
+                  <FooterMenu
+                    menu={footer.menu}
+                    primaryDomainUrl={header.shop.primaryDomain.url}
+                    publicStoreDomain={publicStoreDomain}
+                  />
+                ) : (
+                  <p>No policies available.</p>
+                )}
+              </div>
+            </div>
+            {/* end of main footer */}
+
+            {/* copyright bar */}
+            <div className="copyright-bar">
+              <p>
+                &copy; {new Date().getFullYear()} Veridian Orchard. All rights
+                reserved.
+              </p>
+              <p>Grown with 💚 in Edmonton</p>
+            </div>
+          </div>
         )}
       </Await>
     </Suspense>
@@ -44,12 +190,15 @@ function FooterMenu({
   return (
     <nav className="footer-menu" role="navigation">
       {(menu || FALLBACK_FOOTER_MENU).items.map((item) => {
-        if (!item.url) return null;
+        if (!item.url) {
+          return null;
+        }
+
         // if the url is internal, we strip the domain
         const url =
           item.url.includes('myshopify.com') ||
-            item.url.includes(publicStoreDomain) ||
-            item.url.includes(primaryDomainUrl)
+          item.url.includes(publicStoreDomain) ||
+          item.url.includes(primaryDomainUrl)
             ? new URL(item.url).pathname
             : item.url;
         const isExternal = !url.startsWith('/');
@@ -59,6 +208,7 @@ function FooterMenu({
           </a>
         ) : (
           <NavLink
+            className={'footer-link'}
             end
             key={item.id}
             prefetch="intent"

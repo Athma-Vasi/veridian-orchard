@@ -60,8 +60,14 @@ export default function Homepage() {
   const data = useLoaderData<typeof loader>();
   return (
     <div className="home">
-      <FeaturedCollection collection={data.featuredCollection} />
-      <RecommendedProducts products={data.recommendedProducts} />
+      {/* hero section */}
+      <section className="hero-section"></section>
+
+      {/* recommended products */}
+
+      {/* nursery growth */}
+
+      {/* testimonials */}
     </div>
   );
 }
