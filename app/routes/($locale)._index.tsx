@@ -84,12 +84,37 @@ export default function Homepage() {
 
       {/* recommended products */}
       <section className="featured-recommended-products">
-        <FeaturedCollection collection={data.featuredCollection} />
+        {/* <FeaturedCollection collection={data.featuredCollection} /> */}
         <RecommendedProducts products={data.recommendedProducts} />
       </section>
 
       {/* nursery growth */}
-      <section className="nursery-growth"></section>
+      <section className="nursery-growth">
+        <Image
+          className="left-side-image"
+          loading="lazy"
+          data={{
+            url: '/images/pexels-nanamusic-31665672.jpg',
+            altText: 'Nursery Growth Image',
+          }}
+        />
+
+        <div className="right-side-content">
+          <h2>Nurturing Growth, Naturally</h2>
+          <p>
+            At Veridian Orchard, we believe in cultivating more than just
+            plants; we nurture a sustainable future. Our nursery is dedicated to
+            eco-friendly practices that promote healthy growth while respecting
+            the environment. From organic soil blends to water-wise irrigation,
+            every step we take is designed to minimize our carbon footprint and
+            maximize the vitality of our plants. Join us in our mission to grow
+            a greener tomorrow, one seedling at a time.
+          </p>
+          <Link to="/about" className="learn-more-cta">
+            Learn More ➔
+          </Link>
+        </div>
+      </section>
 
       {/* testimonials */}
       <section className="testimonials"></section>
