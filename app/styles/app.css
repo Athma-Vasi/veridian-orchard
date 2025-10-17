@@ -26,7 +26,7 @@
   --color-primary: oklch(46.06% 0.088 116.1);
   --color-secondary: oklch(76.11% 0.076 138);
   --color-background: oklch(99.64% 0.007 132.8);
-  --color-accent: oklch(78.58% 0.119 63.8);
+  --color-accent: oklch(78.612% 0.1191 63.361);
   --color-text: oklch(39.14% 0 0);
   --color-highlight: oklch(87% 0.179 74.4);
 
@@ -910,7 +910,6 @@ img {
 */
 
 .footer {
-  border-top: 1px solid var(--color-dark);
   background: var(--color-primary);
   padding: var(--padding) 1rem;
   font-family: var(--font-sans);
@@ -1319,7 +1318,6 @@ aside li {
 
 .homepage {
   width: 100%;
-  outline: 3px solid red;
 
   .hero-section {
     position: relative;
@@ -1527,7 +1525,6 @@ aside li {
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      outline: 3px solid rebeccapurple;
       text-align: center;
       gap: 2rem;
       padding: 4rem 1rem;
@@ -1539,7 +1536,6 @@ aside li {
 
       .right-side-content {
         width: clamp(300px, 80vw, 600px);
-        outline: 1px solid blue;
         align-items: center;
 
         h2 {
@@ -1583,7 +1579,7 @@ aside li {
     .nursery-growth {
       display: flex;
       align-items: start;
-      justify-content: center;
+      justify-content: space-evenly;
       gap: 2rem;
       width: 100%;
       max-width: 1920px;
@@ -1645,6 +1641,54 @@ aside li {
           text-decoration: none;
         }
       }
+    }
+  }
+
+  .testimonials {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 1rem;
+    gap: 2rem;
+    background: var(--color-primary);
+
+    .stars-container {
+      display: flex;
+      gap: 0.25rem;
+      font-size: 1.5rem;
+      color: var(--color-accent);
+
+      .star-icon {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+
+    blockquote {
+      font-family: var(--font-serif);
+      font-size: clamp(
+        var(--font-body-min-size),
+        1.5vw,
+        var(--font-body-max-size)
+      );
+      font-style: italic;
+      font-weight: 300;
+      color: var(--color-light);
+      max-width: 800px;
+      text-align: center;
+      margin: 0;
+    }
+
+    cite {
+      font-family: var(--font-sans);
+      font-size: clamp(
+        var(--font-subheading-min-size),
+        1.15vw,
+        var(--font-subheading-max-size)
+      );
+      font-weight: 500;
+      color: var(--color-light);
     }
   }
 }

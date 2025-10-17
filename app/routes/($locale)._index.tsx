@@ -7,7 +7,7 @@ import type {
   RecommendedProductsQuery,
 } from 'storefrontapi.generated';
 import {ProductItem} from '~/components/ProductItem';
-import {ArrowRight} from 'lucide-react';
+import {ArrowRight, Star, StarIcon} from 'lucide-react';
 
 export const meta: Route.MetaFunction = () => {
   return [{title: 'Hydrogen | Home'}];
@@ -117,7 +117,20 @@ export default function Homepage() {
       </section>
 
       {/* testimonials */}
-      <section className="testimonials"></section>
+      <section className="testimonials">
+        <div className="stars-container">
+          {Array.from({length: 5}).map((_, index) => (
+            <Star key={index.toString()} className="star-icon" fill="#efa864" />
+          ))}
+        </div>
+        {/* blockquote */}
+        <blockquote>
+          "Veridian Orchard transformed my garden into a lush paradise! Their
+          plants are healthy and vibrant, and their commitment to sustainability
+          is truly inspiring. I love knowing that my garden is eco-friendly."
+        </blockquote>
+        <cite>- Jamie L.</cite>
+      </section>
     </div>
   );
 }
