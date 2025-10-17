@@ -45,7 +45,7 @@ export function Footer({
             <div className="main-container">
               {/* brand column */}
               <div className="brand-column">
-                <h2>Veridian Orchard</h2>
+                <h2>Our Mission</h2>
                 <p>
                   At Veridian Orchard, we cultivate more than just plants; we
                   nurture a community rooted in sustainability, quality, and

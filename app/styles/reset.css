@@ -1,4 +1,4 @@
-body {
+/* body {
   font-family:
     system-ui,
     -apple-system,
@@ -58,7 +58,6 @@ a {
 }
 
 a:hover {
-  /* text-decoration: underline; */
   cursor: pointer;
 }
 
@@ -76,10 +75,6 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-}
-
-body > main {
-  margin: 0 1rem 1rem 1rem;
 }
 
 section {
@@ -136,4 +131,4 @@ code {
   border-radius: 4px;
   font-family: monospace;
   padding: 0.25rem;
-}
+} */

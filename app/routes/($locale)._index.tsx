@@ -7,6 +7,7 @@ import type {
   RecommendedProductsQuery,
 } from 'storefrontapi.generated';
 import {ProductItem} from '~/components/ProductItem';
+import {ArrowRight} from 'lucide-react';
 
 export const meta: Route.MetaFunction = () => {
   return [{title: 'Hydrogen | Home'}];
@@ -59,15 +60,39 @@ function loadDeferredData({context}: Route.LoaderArgs) {
 export default function Homepage() {
   const data = useLoaderData<typeof loader>();
   return (
-    <div className="home">
+    <div className="homepage">
       {/* hero section */}
-      <section className="hero-section"></section>
+      <section className="hero-section">
+        <Image
+          className="hero-image"
+          loading="eager"
+          data={{
+            url: '/images/pexels-teona-swift-6913651.jpg',
+            width: 1920,
+            height: 1080,
+            altText: 'Hero Image',
+          }}
+        />
+        <div className="hero-text">
+          <h1>Welcome to Veridian Orchard</h1>
+          <p>Sustainable roots. Purposeful growth. One home at a time.</p>
+          <Link to="/collections" className="shop-now-link">
+            Explore ➔
+          </Link>
+        </div>
+      </section>
 
       {/* recommended products */}
+      <section className="featured-recommended-products">
+        <FeaturedCollection collection={data.featuredCollection} />
+        <RecommendedProducts products={data.recommendedProducts} />
+      </section>
 
       {/* nursery growth */}
+      <section className="nursery-growth"></section>
 
       {/* testimonials */}
+      <section className="testimonials"></section>
     </div>
   );
 }
@@ -105,7 +130,7 @@ function RecommendedProducts({
       <Suspense fallback={<div>Loading...</div>}>
         <Await resolve={products}>
           {(response) => (
-            <div className="recommended-products-grid">
+            <div className="products-grid">
               {response
                 ? response.products.nodes.map((product) => (
                     <ProductItem key={product.id} product={product} />
@@ -161,6 +186,15 @@ const RECOMMENDED_PRODUCTS_QUERY = `#graphql
       width
       height
     }
+    images(first:10){
+      nodes {
+        id
+        altText
+        url
+        width
+        height
+      }
+    }    
   }
   query RecommendedProducts ($country: CountryCode, $language: LanguageCode)
     @inContext(country: $country, language: $language) {
