@@ -26,84 +26,32 @@ export function Header({
   publicStoreDomain,
 }: HeaderProps) {
   const {shop, menu} = header;
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isScrollingUp, setIsScrollingUp] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const {type: asideType} = useAside();
-
-  useEffect(() => {
-    const root = document.documentElement;
-    root.style.setProperty(
-      '--announcement-height',
-      isScrolled ? '0px' : '40px',
-    );
-    root.style.setProperty('--header-height', isScrolled ? '60px' : '80px');
-
-    const handleScroll = () => {
-      if (asideType !== 'closed') {
-        return;
-      }
-
-      const currentScrollY = window.scrollY;
-      setIsScrollingUp(currentScrollY < lastScrollY);
-      setLastScrollY(currentScrollY);
-      setIsScrolled(currentScrollY > 50);
-    };
-
-    // telling browser we will handle the scroll event
-    window.addEventListener('scroll', handleScroll, {passive: true});
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isScrolled, lastScrollY, asideType]);
 
   return (
-    <div className={`header-wrapper ${isScrolled ? 'scrolled' : ''}`}>
-      {/* announcement bar */}
-      <div
-        className={`announcement-header-wrapper ${isScrolled ? 'scrolled' : ''}`}
-      >
-        <div className="container">
-          <p className="announcement-header">
-            Complimentary shipping on orders over $200!
-          </p>
+    <header className="main-header-wrapper">
+      {/* header content */}
+      <div className="main-header-content">
+        {/* mobile menu toggle */}
+        <HeaderMenuMobileToggle />
+
+        <NavLink prefetch="intent" to="/" className="logo-navlink">
+          <h1 className="logo">Veridian Orchard</h1>
+        </NavLink>
+
+        {/* desktop navigation */}
+        <div className="main-header-nav-wrapper">
+          <HeaderMenu
+            menu={menu}
+            viewport="desktop"
+            primaryDomainUrl={header.shop.primaryDomain.url}
+            publicStoreDomain={publicStoreDomain}
+          />
         </div>
+
+        {/* header call to actions */}
+        <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
       </div>
-
-      {/* main header */}
-      <header className="main-header-wrapper">
-        <div className="container">
-          {/* mobile logo (550 and below) */}
-          <NavLink prefetch="intent" to="/" className="mobile-logo-navlink" end>
-            <h1 className="mobile-logo">Veridian Orchard</h1>
-          </NavLink>
-
-          {/* header content */}
-          <div className="main-header-content">
-            {/* mobile menu toggle */}
-            <HeaderMenuMobileToggle />
-
-            {/* logo (above 550px) */}
-            <NavLink prefetch="intent" to="/" className="desktop-logo-navlink">
-              <h1 className="desktop-logo">Veridian Orchard</h1>
-            </NavLink>
-
-            {/* desktop navigation */}
-            <div className="main-header-nav-wrapper">
-              <HeaderMenu
-                menu={menu}
-                viewport="desktop"
-                primaryDomainUrl={header.shop.primaryDomain.url}
-                publicStoreDomain={publicStoreDomain}
-              />
-            </div>
-
-            {/* header call to actions */}
-
-            <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
-          </div>
-        </div>
-      </header>
-    </div>
+    </header>
   );
 
   // return (
@@ -150,7 +98,7 @@ export function HeaderMenu({
     >
       {/* mobile */}
       {viewport === 'mobile' && (
-        <>
+        <div className="mobile-navigation">
           {/* mobile nav links */}
           <div className="navlinks-mobile">
             {(menu || FALLBACK_HEADER_MENU).items.map((item) => {
@@ -177,7 +125,7 @@ export function HeaderMenu({
                 <NavLink
                   className={({isActive}) =>
                     // `${baseClassName} text-lg py-2 block ${isActive ? 'text-brand-accent' : 'text-black'}`
-                    `navlink navlink-mobile ${isActive ? 'active' : ''}`
+                    `navlink-mobile ${isActive ? 'active' : ''}`
                   }
                   // end is used to apply active styles only when the path matches exactly
                   end
@@ -196,12 +144,12 @@ export function HeaderMenu({
           <div className="footer-navlinks-mobile">
             <NavLink
               to="/account"
-              className="navlink navlink-mobile"
+              className="navlink-mobile"
               onClick={close}
               prefetch="intent"
             >
               <div className="navlink-icon-text">
-                <User className="w-5 h-5" />
+                <User className="cta-icon" />
                 <span className="navlink-text">Account</span>
               </div>
             </NavLink>
@@ -213,12 +161,12 @@ export function HeaderMenu({
               className="footer-button-mobile"
             >
               <div className="button-icon-text">
-                <Search className="w-5 h-5" />
+                <Search className="cta-icon" />
                 <span className="button-text">Search</span>
               </div>
             </button>
           </div>
-        </>
+        </div>
       )}
 
       {/* desktop */}
@@ -247,7 +195,7 @@ export function HeaderMenu({
             return (
               <NavLink
                 className={({isActive}) =>
-                  `navlink navlink-desktop ${isActive ? 'active' : ''}`
+                  `navlink-desktop ${isActive ? 'active' : ''}`
                 }
                 // end is used to apply active styles only when the path matches exactly
                 end
@@ -312,20 +260,19 @@ function HeaderCtas({
 }: Pick<HeaderProps, 'isLoggedIn' | 'cart'>) {
   return (
     <nav className="header-ctas" role="navigation">
-      {/* <HeaderMenuMobileToggle /> */}
       <SearchToggle />
-      <NavLink prefetch="intent" to="/account" className="navlink account-cta">
+      <NavLink prefetch="intent" to="/account" className="account-cta">
         <Suspense fallback="Sign in">
           <Await resolve={isLoggedIn} errorElement="Sign in">
             {(isLoggedIn) =>
               isLoggedIn ? (
                 <>
-                  <User className="w-6 h-6" />
+                  <User className="cta-icon" />
                   <span className="accessible-hidden">Account</span>
                 </>
               ) : (
                 <>
-                  <User className="w-6 h-6" />
+                  <User className="cta-icon" />
                   <span className="accessible-hidden">Sign in</span>
                 </>
               )
@@ -359,7 +306,7 @@ function HeaderMenuMobileToggle() {
       className="header-menu-mobile-toggle"
       onClick={() => open('mobile')}
     >
-      <Menu className="w-6 h-6" />
+      <Menu className="cta-icon" />
     </button>
   );
 }
@@ -368,7 +315,7 @@ function SearchToggle() {
   const {open} = useAside();
   return (
     <button className="search-toggle-cta" onClick={() => open('search')}>
-      <Search className="w-6 h-6" />
+      <Search className="cta-icon" />
     </button>
   );
 }
@@ -390,7 +337,7 @@ function CartBadge({count}: {count: number | null}) {
         } as CartViewPayload);
       }}
     >
-      <ShoppingBag className="w-6 h-6" />
+      <ShoppingBag className="cta-icon" />
       {count !== null && count > 0 && (
         <span className="badge">{count > 9 ? '9+' : count}</span>
       )}
