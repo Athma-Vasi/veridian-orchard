@@ -1,3 +1,4 @@
+import {X} from 'lucide-react';
 import {
   createContext,
   type ReactNode,
@@ -93,7 +94,7 @@ export function Aside({
         <header>
           <h3>{heading}</h3>
           <button className="close reset" onClick={close} aria-label="Close">
-            &times;
+            <X />
           </button>
         </header>
         <main>{children}</main>

@@ -48,9 +48,6 @@ export function PageLayout({
           />
         )}
         {children}
-        {children}
-        {children}
-        {children}
       </main>
       <Footer
         footer={footer}
