@@ -1,5 +1,5 @@
 import type {Route} from './+types/collections.all';
-import {useLoaderData} from 'react-router';
+import {Link, useLoaderData} from 'react-router';
 import {getPaginationVariables, Image, Money} from '@shopify/hydrogen';
 import {PaginatedResourceSection} from '~/components/PaginatedResourceSection';
 import {ProductItem} from '~/components/ProductItem';
@@ -52,21 +52,121 @@ export default function Collection() {
 
   return (
     <div className="collection">
-      <h1>Products</h1>
-      <PaginatedResourceSection<CollectionItemFragment>
-        connection={products}
-        resourcesClassName="products-grid"
-      >
-        {({node: product, index}) => (
-          <ProductItem
-            key={product.id}
-            product={product}
-            loading={index < 8 ? 'eager' : undefined}
-          />
-        )}
-      </PaginatedResourceSection>
+      {/* hero section */}
+      <section className="hero-section">
+        <Image
+          className="hero-image"
+          loading="eager"
+          data={{
+            url: '/images/pexels-nammau-12034442.jpg',
+            width: 1920,
+            height: 1080,
+            altText: 'Hero Image',
+          }}
+        />
+        <div className="hero-text">
+          <h1>Explore Our Curated Collection of Sustainable Products</h1>
+          <p>
+            Discover a curated selection of houseplants, garden-ready specimens,
+            and sustainable plant care essentials. From easy-care indoor greens
+            to seasonal outdoor varieties, each plant is chosen for health,
+            provenance, and long-term enjoyment — with tips to help them thrive.
+          </p>
+        </div>
+      </section>
+
+      {/* collection navigation */}
+
+      <section className="collection-navigation">
+        <div className="left-side">
+          <h2>The Collection</h2>
+          <p>Showing {products.nodes.length} nurtured plants</p>
+        </div>
+
+        <div className="filter-sort-buttons">
+          <button>Filter</button>
+          <button>Sort</button>
+        </div>
+      </section>
+
+      {/* products grid */}
+      <section className="products-grid">
+        <PaginatedResourceSection<CollectionItemFragment>
+          connection={products}
+          resourcesClassName="products-grid-items"
+        >
+          {({node: product, index}) => (
+            <ProductItem
+              key={product.id}
+              product={product}
+              loading={index < 8 ? 'eager' : undefined}
+            />
+          )}
+        </PaginatedResourceSection>
+      </section>
+
+      {/* nursery growth */}
+      <section className="nursery-growth">
+        <Image
+          className="left-side-image"
+          loading="lazy"
+          data={{
+            url: '/images/pexels-nanamusic-31665672.jpg',
+            altText: 'Nursery Growth Image',
+          }}
+        />
+
+        <div className="right-side-content">
+          <h2>Nurturing Growth, Naturally</h2>
+          <p>
+            At Veridian Orchard, we believe in cultivating more than just
+            plants; we nurture a sustainable future. Our nursery is dedicated to
+            eco-friendly practices that promote healthy growth while respecting
+            the environment. From organic soil blends to water-wise irrigation,
+            every step we take is designed to minimize our carbon footprint and
+            maximize the vitality of our plants. Join us in our mission to grow
+            a greener tomorrow, one seedling at a time.
+          </p>
+          <Link to="/about" className="learn-more-cta">
+            Learn More ➔
+          </Link>
+        </div>
+      </section>
+
+      {/* heritage banner */}
+      <section className="heritage-banner">
+        <h2>Our Heritage</h2>
+        <p>
+          Rooted in a legacy of sustainable cultivation, Veridian Orchard has
+          been a pioneer in eco-friendly plant care for over two decades. Our
+          commitment to environmental stewardship and community growth defines
+          who we are. From our carefully tended nurseries to our educational
+          outreach programs, we strive to inspire a deeper connection with
+          nature. Join us as we continue to cultivate a greener, more
+          sustainable future for generations to come.
+        </p>
+        <p>Available for private events and workshops.</p>
+      </section>
     </div>
   );
+
+  // return (
+  //   <div className="collection">
+  //     <h1>Products</h1>
+  //     <PaginatedResourceSection<CollectionItemFragment>
+  //       connection={products}
+  //       resourcesClassName="products-grid"
+  //     >
+  //       {({node: product, index}) => (
+  //         <ProductItem
+  //           key={product.id}
+  //           product={product}
+  //           loading={index < 8 ? 'eager' : undefined}
+  //         />
+  //       )}
+  //     </PaginatedResourceSection>
+  //   </div>
+  // );
 }
 
 const COLLECTION_ITEM_FRAGMENT = `#graphql
