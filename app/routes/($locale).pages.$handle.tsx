@@ -1,4 +1,4 @@
-import {useLoaderData} from 'react-router';
+import {Link, useLoaderData} from 'react-router';
 import type {Route} from './+types/pages.$handle';
 import {redirectIfHandleIsLocalized} from '~/lib/redirect';
 
@@ -59,12 +59,59 @@ export default function Page() {
 
   return (
     <div className="page">
-      <header>
+      {/* hero section */}
+      <section className="hero">
         <h1>{page.title}</h1>
-      </header>
-      <main dangerouslySetInnerHTML={{__html: page.body}} />
+
+        {page.subtitle?.value && (
+          <div
+            className="subtitle"
+            dangerouslySetInnerHTML={{__html: page.subtitle.value}}
+          />
+        )}
+      </section>
+
+      {/* page section */}
+      <section className="introduction-section">
+        {page.introText?.value && (
+          <div
+            className="intro-text"
+            dangerouslySetInnerHTML={{__html: page.introText.value}}
+          />
+        )}
+
+        <div
+          className="page-body"
+          dangerouslySetInnerHTML={{__html: page.body}}
+        />
+      </section>
+
+      {/* cta section */}
+      {page.ctaContent?.value && page.ctaButton?.value && (
+        <section className="cta-section">
+          <div
+            className="cta-content"
+            dangerouslySetInnerHTML={{__html: page.ctaContent.value}}
+          />
+          <Link
+            to="/pages/contact"
+            prefetch="intent"
+            className="cta-button-link"
+            dangerouslySetInnerHTML={{__html: page.ctaButton.value}}
+          ></Link>
+        </section>
+      )}
     </div>
   );
+
+  // return (
+  //   <div className="page">
+  //     <header>
+  //       <h1>{page.title}</h1>
+  //     </header>
+  //     <main dangerouslySetInnerHTML={{__html: page.body}} />
+  //   </div>
+  // );
 }
 
 const PAGE_QUERY = `#graphql
@@ -83,6 +130,19 @@ const PAGE_QUERY = `#graphql
         description
         title
       }
+      subtitle: metafield(namespace: "custom", key: "subtitle") {
+        value
+      }
+      introText: metafield(namespace: "custom", key: "intro_text") {
+        value
+      }
+      ctaContent: metafield(namespace: "custom", key: "cta_content") {
+        value
+      }
+      ctaButton: metafield(namespace: "custom", key: "cta_button") {
+        value
+      }
+
     }
   }
 ` as const;

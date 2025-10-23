@@ -199,6 +199,7 @@ div {
   color: var(--color-text);
   margin: 0;
   text-shadow: 0 2px 4px oklch(0% 0 0 / 0.07);
+  font-weight: 300;
 }
 
 main {
@@ -2341,6 +2342,108 @@ main {
       text-align: center;
       color: var(--color-text);
       padding-top: 1rem;
+    }
+  }
+}
+
+/*
+* --------------------------------------------------
+* page/about-us
+* --------------------------------------------------
+*/
+
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: var(--app-width);
+  margin-left: auto;
+
+  .hero {
+    margin-right: auto;
+    padding: var(--padding);
+    width: 100%;
+
+    h1 {
+      font-family: var(--font-serif);
+      font-size: var(--font-heading-size);
+      font-weight: 500;
+      padding-bottom: 1rem;
+      color: var(--color-primary);
+    }
+
+    .subtitle {
+      font-family: var(--font-serif);
+      font-size: var(--font-subheading-size);
+      font-weight: 300;
+      margin-top: 0;
+      color: var(--color-text);
+    }
+  }
+
+  .introduction-section {
+    width: 100%;
+    padding: var(--padding);
+
+    .intro-text {
+      font-family: var(--font-sans);
+      font-size: var(--font-body-size);
+      font-weight: 300;
+      line-height: var(--line-height);
+      color: var(--color-text);
+    }
+
+    .page-body {
+      h2 {
+        font-size: var(--font-subheading-size);
+        font-weight: 500;
+        padding: var(--padding-y) 0px;
+      }
+
+      h3 {
+        font-size: var(--font-body-size);
+        font-weight: 300;
+        padding: var(--padding);
+      }
+
+      h3 + p {
+        padding-left: 3rem;
+      }
+
+      p:last-child {
+        padding-top: 2rem;
+      }
+    }
+  }
+
+  .cta-section {
+    width: 100%;
+    padding-top: 2rem;
+    padding: var(--padding);
+    background: var(--color-highlight);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+    .cta-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 0.5rem;
+
+      h3 {
+        font-size: var(--font-subheading-size);
+      }
+    }
+
+    .cta-button-link {
+      cursor: pointer;
+      font-family: var(--font-serif);
+      font-weight: 500;
     }
   }
 }
