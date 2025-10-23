@@ -1,4 +1,4 @@
-import {redirect, useLoaderData} from 'react-router';
+import {Await, redirect, useLoaderData} from 'react-router';
 import type {Route} from './+types/products.$handle';
 import {
   getSelectedProductOptions,
@@ -9,9 +9,10 @@ import {
   useSelectedOptionInUrlParam,
 } from '@shopify/hydrogen';
 import {ProductPrice} from '~/components/ProductPrice';
-import {ProductImage} from '~/components/ProductImage';
+import ProductImage from '~/components/ProductImage';
 import {ProductForm} from '~/components/ProductForm';
 import {redirectIfHandleIsLocalized} from '~/lib/redirect';
+import {Suspense} from 'react';
 
 export const meta: Route.MetaFunction = ({data}) => {
   return [
@@ -99,8 +100,35 @@ export default function Product() {
 
   return (
     <div className="product">
-      <ProductImage selectedVariantImage={selectedVariant?.image} />
+      <ProductImage
+        selectedVariantImage={selectedVariant?.image}
+        galleryImages={product.images}
+      />
+
+      {/* right side */}
       <div className="product-main">
+        {/* product title and price */}
+        <h1>{title}</h1>
+        <ProductPrice
+          price={selectedVariant?.price}
+          compareAtPrice={selectedVariant?.compareAtPrice}
+        />
+
+        {/* product description */}
+        <div
+          className="product-description"
+          dangerouslySetInnerHTML={{__html: descriptionHtml}}
+        />
+
+        {/* products form */}
+        <ProductForm
+          product={product}
+          productOptions={productOptions}
+          selectedVariant={selectedVariant}
+        />
+      </div>
+
+      {/* <div className="product-main">
         <h1>{title}</h1>
         <ProductPrice
           price={selectedVariant?.price}
@@ -119,7 +147,7 @@ export default function Product() {
         <br />
         <div dangerouslySetInnerHTML={{__html: descriptionHtml}} />
         <br />
-      </div>
+      </div> */}
       <Analytics.ProductView
         data={{
           products: [
@@ -203,6 +231,15 @@ const PRODUCT_FRAGMENT = `#graphql
         }
       }
     }
+    images(first: 10) {
+      nodes {
+        id
+        url
+        altText
+        width
+        height
+      }
+    }
     selectedOrFirstAvailableVariant(selectedOptions: $selectedOptions, ignoreUnknownOptions: true, caseInsensitiveMatch: true) {
       ...ProductVariant
     }
@@ -213,6 +250,20 @@ const PRODUCT_FRAGMENT = `#graphql
       description
       title
     }
+    # metafields
+    productCharacteristics: metafield(namespace: "custom", key: "product_characteristics") {
+      value
+    }
+    careInstructions: metafield(namespace: "custom", key: "care_instructions") {
+      value
+    }
+    locallySourced: metafield(namespace: "custom", key: "locally_sourced") {
+      value
+    }
+    fulfillmentAndSourcing: metafield(namespace: "custom", key: "fulfillment_and_sourcing") {
+      value
+    }
+
   }
   ${PRODUCT_VARIANT_FRAGMENT}
 ` as const;

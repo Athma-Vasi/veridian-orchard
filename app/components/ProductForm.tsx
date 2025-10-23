@@ -1,5 +1,5 @@
 import {Link, useNavigate} from 'react-router';
-import {type MappedProductOptions} from '@shopify/hydrogen';
+import {RichText, type MappedProductOptions} from '@shopify/hydrogen';
 import type {
   Maybe,
   ProductOptionValueSwatch,
@@ -9,14 +9,19 @@ import {useAside} from './Aside';
 import type {ProductFragment} from 'storefrontapi.generated';
 
 export function ProductForm({
+  product,
   productOptions,
   selectedVariant,
 }: {
+  product: ProductFragment;
   productOptions: MappedProductOptions[];
   selectedVariant: ProductFragment['selectedOrFirstAvailableVariant'];
 }) {
   const navigate = useNavigate();
   const {open} = useAside();
+
+  console.log('product', product);
+
   return (
     <div className="product-form">
       {productOptions.map((option) => {
@@ -103,25 +108,69 @@ export function ProductForm({
           </div>
         );
       })}
-      <AddToCartButton
-        disabled={!selectedVariant || !selectedVariant.availableForSale}
-        afterAddToCart={() => {
-          open('cart');
-        }}
-        lines={
-          selectedVariant
-            ? [
-                {
-                  merchandiseId: selectedVariant.id,
-                  quantity: 1,
-                  selectedVariant,
-                },
-              ]
-            : []
-        }
-      >
-        {selectedVariant?.availableForSale ? 'Add to cart' : 'Sold out'}
-      </AddToCartButton>
+
+      <div className="info">
+        {selectedVariant?.availableForSale ? (
+          <span className="in-stock">Ready to Ship</span>
+        ) : (
+          <span className="out-of-stock">Out of Stock</span>
+        )}
+        <span>SKU: {selectedVariant?.sku ?? 'No SKU found'}</span>
+      </div>
+
+      {/* add to cart section */}
+      <div className="add-to-cart-section">
+        <AddToCartButton
+          disabled={!selectedVariant || !selectedVariant.availableForSale}
+          afterAddToCart={() => {
+            open('cart');
+          }}
+          lines={
+            selectedVariant
+              ? [
+                  {
+                    merchandiseId: selectedVariant.id,
+                    quantity: 1,
+                    selectedVariant,
+                  },
+                ]
+              : []
+          }
+        >
+          {selectedVariant?.availableForSale ? 'Add to cart' : 'Sold out'}
+        </AddToCartButton>
+      </div>
+
+      {/* product details accordion */}
+
+      <section className="product-details">
+        {/* product characteristics */}
+        {product.productCharacteristics && (
+          <details className="product-characteristics">
+            <summary>Product Characteristics</summary>
+
+            <RichText data={product.productCharacteristics.value} />
+          </details>
+        )}
+
+        {/* care instructions */}
+        {product.careInstructions && (
+          <details className="care-instructions">
+            <summary>Care Instructions</summary>
+
+            <RichText data={product.careInstructions.value} />
+          </details>
+        )}
+
+        {/* locally sourced */}
+        {product.locallySourced && (
+          <details className="locally-sourced">
+            <summary>Locally Sourced</summary>
+
+            <p>{product.locallySourced?.value ? 'Yes' : 'No'}</p>
+          </details>
+        )}
+      </section>
     </div>
   );
 }
