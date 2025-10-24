@@ -54,20 +54,7 @@ export function Header({
     </header>
   );
 
-  // return (
-  //   <header className="header">
-  //     <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
-  //       <strong>{shop.name}</strong>
-  //     </NavLink>
-  //     <HeaderMenu
-  //       menu={menu}
-  //       viewport="desktop"
-  //       primaryDomainUrl={header.shop.primaryDomain.url}
-  //       publicStoreDomain={publicStoreDomain}
-  //     />
-  //     <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
-  //   </header>
-  // );
+  
 }
 
 export function HeaderMenu({
@@ -143,7 +130,7 @@ export function HeaderMenu({
           {/* mobile footer links */}
           <div className="footer-navlinks-mobile">
             <NavLink
-              to="/account"
+              to="/"
               className="navlink-mobile"
               onClick={close}
               prefetch="intent"
@@ -213,45 +200,7 @@ export function HeaderMenu({
     </nav>
   );
 
-  // return (
-  //   <nav className={className} role="navigation">
-  //     {viewport === 'mobile' && (
-  //       <NavLink
-  //         end
-  //         onClick={close}
-  //         prefetch="intent"
-  //         style={activeLinkStyle}
-  //         to="/"
-  //       >
-  //         Home
-  //       </NavLink>
-  //     )}
-  //     {(menu || FALLBACK_HEADER_MENU).items.map((item) => {
-  //       if (!item.url) return null;
 
-  //       // if the url is internal, we strip the domain
-  //       const url =
-  //         item.url.includes('myshopify.com') ||
-  //         item.url.includes(publicStoreDomain) ||
-  //         item.url.includes(primaryDomainUrl)
-  //           ? new URL(item.url).pathname
-  //           : item.url;
-  //       return (
-  //         <NavLink
-  //           className="header-menu-item"
-  //           end
-  //           key={item.id}
-  //           onClick={close}
-  //           prefetch="intent"
-  //           style={activeLinkStyle}
-  //           to={url}
-  //         >
-  //           {item.title}
-  //         </NavLink>
-  //       );
-  //     })}
-  //   </nav>
-  // );
 }
 
 function HeaderCtas({
@@ -261,7 +210,7 @@ function HeaderCtas({
   return (
     <nav className="header-ctas" role="navigation">
       <SearchToggle />
-      <NavLink prefetch="intent" to="/account" className="account-cta">
+      <NavLink prefetch="intent" to="/" className="account-cta">
         <Suspense fallback="Sign in">
           <Await resolve={isLoggedIn} errorElement="Sign in">
             {(isLoggedIn) =>
@@ -283,21 +232,7 @@ function HeaderCtas({
       <CartToggle cart={cart} />
     </nav>
   );
-  // return (
-  //   <nav className="header-ctas" role="navigation">
-  //     <HeaderMenuMobileToggle />
-  //     <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
-  //       <Suspense fallback="Sign in">
-  //         <Await resolve={isLoggedIn} errorElement="Sign in">
-  //           {(isLoggedIn) => (isLoggedIn ? 'Account' : 'Sign in')}
-  //         </Await>
-  //       </Suspense>
-  //     </NavLink>
-  //     <SearchToggle />
-  //     <CartToggle cart={cart} />
-  //   </nav>
-  // );
-}
+
 
 function HeaderMenuMobileToggle() {
   const {open} = useAside();
@@ -345,23 +280,7 @@ function CartBadge({count}: {count: number | null}) {
     </button>
   );
 
-  // return (
-  //   <a
-  //     href="/cart"
-  //     onClick={(e) => {
-  //       e.preventDefault();
-  //       open('cart');
-  //       publish('cart_viewed', {
-  //         cart,
-  //         prevCart,
-  //         shop,
-  //         url: window.location.href || '',
-  //       } as CartViewPayload);
-  //     }}
-  //   >
-  //     Cart {count === null ? <span>&nbsp;</span> : count}
-  //   </a>
-  // );
+  
 }
 
 function CartToggle({cart}: Pick<HeaderProps, 'cart'>) {

@@ -83,25 +83,4 @@ export function AddToCartButton({
       }}
     </CartForm>
   );
-
-  // return (
-  //   <CartForm route="/cart" inputs={{lines}} action={CartForm.ACTIONS.LinesAdd}>
-  //     {(fetcher: FetcherWithComponents<any>) => (
-  //       <>
-  //         <input
-  //           name="analytics"
-  //           type="hidden"
-  //           value={JSON.stringify(analytics)}
-  //         />
-  //         <button
-  //           type="submit"
-  //           onClick={onClick}
-  //           disabled={disabled ?? fetcher.state !== 'idle'}
-  //         >
-  //           {children}
-  //         </button>
-  //       </>
-  //     )}
-  //   </CartForm>
-  // );
 }

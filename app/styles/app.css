@@ -199,11 +199,12 @@ div {
   color: var(--color-text);
   margin: 0;
   text-shadow: 0 2px 4px oklch(0% 0 0 / 0.07);
-  font-weight: 300;
+  font-weight: 400;
 }
 
 main {
   width: var(--app-width);
+  background: var(--color-background);
 }
 
 details {
@@ -2383,35 +2384,113 @@ main {
 
   .introduction-section {
     width: 100%;
-    padding: var(--padding);
+    padding: 0px var(--padding-x);
 
     .intro-text {
-      font-family: var(--font-sans);
-      font-size: var(--font-body-size);
-      font-weight: 300;
-      line-height: var(--line-height);
-      color: var(--color-text);
+      padding-bottom: var(--padding-y);
     }
 
     .page-body {
-      h2 {
-        font-size: var(--font-subheading-size);
-        font-weight: 500;
-        padding: var(--padding-y) 0px;
+      padding-bottom: var(--padding-y);
+
+      .about-us-content {
+        h2 {
+          font-size: var(--font-subheading-size);
+          font-weight: 500;
+          padding: var(--padding-y) 0px;
+        }
+
+        h3 {
+          font-size: var(--font-body-size);
+          font-weight: 300;
+          padding: var(--padding);
+        }
+
+        h3 + p {
+          padding-left: 3rem;
+        }
+
+        p:last-child {
+          padding-top: 2rem;
+        }
       }
 
-      h3 {
-        font-size: var(--font-body-size);
-        font-weight: 300;
-        padding: var(--padding);
-      }
+      .contact-content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: var(--gap);
+        width: 100%;
 
-      h3 + p {
-        padding-left: 3rem;
-      }
+        h4 {
+          font-size: var(--font-body-size);
+          font-weight: 500;
+          padding-top: var(--padding-y);
+        }
 
-      p:last-child {
-        padding-top: 2rem;
+        ul {
+          list-style: disc;
+          padding-left: 1.5rem;
+
+          li {
+            padding-bottom: 0.5rem;
+          }
+        }
+
+        .contact-form {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          width: 100%;
+          max-width: 768px;
+          gap: 0.5rem;
+          place-self: center;
+          padding: var(--padding);
+
+          label {
+            font-size: var(--font-body-size);
+            font-weight: 500;
+          }
+
+          input,
+          textarea {
+            width: 100%;
+            padding: 0.5rem;
+            outline: 1px solid var(--color-primary);
+            border: none;
+            border-radius: 4px;
+            font-size: var(--font-body-size);
+            font-family: var(--font-sans);
+            resize: vertical;
+            transition: outline 300ms ease-in-out;
+          }
+          input:focus,
+          textarea:focus {
+            outline: 2px solid var(--color-secondary);
+          }
+
+          button {
+            cursor: pointer;
+            background: var(--color-primary);
+            color: var(--color-background);
+            font-family: var(--font-sans);
+            font-size: var(--font-button-size);
+            font-weight: 600;
+            padding: 0.45rem 0.75rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            border-radius: 4px;
+            transition: background 300ms ease-in-out;
+            border: none;
+            place-self: center;
+            margin-top: 1rem;
+          }
+
+          button:hover {
+            background: var(--color-accent);
+          }
+        }
       }
     }
   }

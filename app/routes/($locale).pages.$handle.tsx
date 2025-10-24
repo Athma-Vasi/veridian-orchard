@@ -103,15 +103,6 @@ export default function Page() {
       )}
     </div>
   );
-
-  // return (
-  //   <div className="page">
-  //     <header>
-  //       <h1>{page.title}</h1>
-  //     </header>
-  //     <main dangerouslySetInnerHTML={{__html: page.body}} />
-  //   </div>
-  // );
 }
 
 const PAGE_QUERY = `#graphql

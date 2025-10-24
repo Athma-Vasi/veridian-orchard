@@ -76,48 +76,6 @@ export function CartLineItem({
       </div>
     </div>
   );
-
-  // return (
-  //   <li key={id} className="cart-line">
-  //     {image && (
-  //       <Image
-  //         alt={title}
-  //         aspectRatio="1/1"
-  //         data={image}
-  //         height={100}
-  //         loading="lazy"
-  //         width={100}
-  //       />
-  //     )}
-
-  //     <div>
-  //       <Link
-  //         prefetch="intent"
-  //         to={lineItemUrl}
-  //         onClick={() => {
-  //           if (layout === 'aside') {
-  //             close();
-  //           }
-  //         }}
-  //       >
-  //         <p>
-  //           <strong>{product.title}</strong>
-  //         </p>
-  //       </Link>
-  //       <ProductPrice price={line?.cost?.totalAmount} />
-  //       <ul>
-  //         {selectedOptions.map((option) => (
-  //           <li key={option.name}>
-  //             <small>
-  //               {option.name}: {option.value}
-  //             </small>
-  //           </li>
-  //         ))}
-  //       </ul>
-  //       <CartLineQuantity line={line} />
-  //     </div>
-  //   </li>
-  // );
 }
 
 /**
