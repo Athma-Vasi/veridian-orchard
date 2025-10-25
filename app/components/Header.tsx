@@ -53,8 +53,6 @@ export function Header({
       </div>
     </header>
   );
-
-  
 }
 
 export function HeaderMenu({
@@ -199,8 +197,6 @@ export function HeaderMenu({
       )}
     </nav>
   );
-
-
 }
 
 function HeaderCtas({
@@ -232,7 +228,7 @@ function HeaderCtas({
       <CartToggle cart={cart} />
     </nav>
   );
-
+}
 
 function HeaderMenuMobileToggle() {
   const {open} = useAside();
@@ -279,8 +275,6 @@ function CartBadge({count}: {count: number | null}) {
       {count === 0 && <span className="badge">0</span>}
     </button>
   );
-
-  
 }
 
 function CartToggle({cart}: Pick<HeaderProps, 'cart'>) {

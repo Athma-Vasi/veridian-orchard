@@ -30,17 +30,15 @@ export function CartLineItem({
     <div className="cart-line-item-wrapper">
       {/* product image */}
       {image && (
-        <div className="image-container">
-          <Image
-            alt={title}
-            aspectRatio="1/1"
-            className="image"
-            data={image}
-            height={100}
-            loading="lazy"
-            width={100}
-          />
-        </div>
+        <Image
+          alt={title}
+          aspectRatio="1/1"
+          className="image"
+          data={image}
+          height={100}
+          loading="lazy"
+          width={100}
+        />
       )}
 
       {/* product details */}

@@ -4,157 +4,52 @@
   --cart-aside-summary-height: 250px;
   --grid-item-width: 175px;
 
-  --app-width-min: 320px;
-  --app-width-ideal: 100vw;
-  --app-width-max: 1920px;
-  --app-width: clamp(
-    var(--app-width-min),
-    var(--app-width-ideal),
-    var(--app-width-max)
+  --app-width: clamp(320px, 100vw, 1920px);
+  --input-width: clamp(
+    200px,
+    50vw,
+    calc(var(--aside-width) - var(--padding-x) - 1rem)
   );
+  --header-height: clamp(60px, 8vh, 80px);
 
-  --header-height-min: 60px;
-  --header-height-ideal: 8vh;
-  --header-height-max: 80px;
-  --header-height: clamp(
-    var(--header-height-min),
-    var(--header-height-ideal),
-    var(--header-height-max)
-  );
-
-  --padding-x-min: 1rem;
-  --padding-x-ideal: 2.5vw;
-  --padding-x-max: 1.7rem;
-  --padding-x: clamp(
-    var(--padding-x-min),
-    var(--padding-x-ideal),
-    var(--padding-x-max)
-  );
-  --padding-y-min: 0.75rem;
-  --padding-y-ideal: 2vw;
-  --padding-y-max: 1.25rem;
-  --padding-y: clamp(
-    var(--padding-y-min),
-    var(--padding-y-ideal),
-    var(--padding-y-max)
-  );
+  --padding-x: clamp(1rem, 2.5vw, 1.7rem);
+  --padding-y: clamp(0.75rem, 2vw, 1.25rem);
   --padding: var(--padding-y) var(--padding-x);
-
-  --gap-min: 1rem;
-  --gap-ideal: 2.5vw;
-  --gap-max: 2rem;
-  --gap: clamp(var(--gap-min), var(--gap-ideal), var(--gap-max));
+  --gap: clamp(1rem, 2.5vw, 2rem);
+  --border-radius: 8px;
 
   --font-sans: 'Work Sans', sans-serif;
   --font-serif: 'Lora', serif;
 
-  --font-mobile-logo-size-min: 1.25rem;
-  --font-mobile-logo-size-ideal: 2.5vw;
-  --font-mobile-logo-size-max: 1.75rem;
-  --font-mobile-logo-size: clamp(
-    var(--font-mobile-logo-size-min),
-    var(--font-mobile-logo-size-ideal),
-    var(--font-mobile-logo-size-max)
-  );
+  --font-mobile-logo-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  --font-desktop-logo-size: clamp(1.75rem, 2.5vw, 2.5rem);
 
-  --font-desktop-logo-size-min: 1.75rem;
-  --font-desktop-logo-size-ideal: 2.5vw;
-  --font-desktop-logo-size-max: 2.5rem;
-  --font-desktop-logo-size: clamp(
-    var(--font-desktop-logo-size-min),
-    var(--font-desktop-logo-size-ideal),
-    var(--font-desktop-logo-size-max)
-  );
+  --font-body-size: clamp(1rem, 1.5vw, 1.25rem);
+  --font-h1-size: clamp(1.5rem, 3vw, 2.5rem);
+  --font-h2-size: clamp(1.35rem, 2.5vw, 2rem);
+  --font-h3-size: clamp(1.25rem, 2vw, 1.75rem);
+  --font-h4-size: clamp(1.15rem, 1.75vw, 1.5rem);
+  --font-h5-size: clamp(1.1rem, 1.5vw, 1.25rem);
+  --font-h6-size: clamp(1rem, 1.25vw, 1.125rem);
+  --font-button-size: clamp(1rem, 1.25vw, 1.125rem);
+  --font-footer-subheading-size: clamp(1.25rem, 2vw, 2rem);
+  --font-subheading-size: clamp(1.35rem, 1.75vw, 1.75rem);
+  --font-button-size: clamp(1rem, 1.15vw, 1.25rem);
+  --line-height: clamp(1.4, 2.5vw, 1.6);
+  --letter-spacing: clamp(0.01em, 0.05vw, 0.05em);
+  --cta-icon-width: clamp(1.5rem, 1.75vw, 2rem);
+  --cta-icon-height: clamp(1.5rem, 1.75vw, 2rem);
 
-  --font-body-size-min: 1rem;
-  --font-body-size-ideal: 1.5vw;
-  --font-body-size-max: 1.25rem;
-  --font-body-size: clamp(
-    var(--font-body-size-min),
-    var(--font-body-size-ideal),
-    var(--font-body-size-max)
-  );
-
-  --font-heading-size-min: 1.5rem;
-  --font-heading-size-ideal: 3vw;
-  --font-heading-size-max: 2.5rem;
-  --font-heading-size: clamp(
-    var(--font-heading-size-min),
-    var(--font-heading-size-ideal),
-    var(--font-heading-size-max)
-  );
-
-  --font-footer-subheading-size-min: 1.25rem;
-  --font-footer-subheading-size-ideal: 2vw;
-  --font-footer-subheading-size-max: 2rem;
-  --font-footer-subheading-size: clamp(
-    var(--font-footer-subheading-size-min),
-    var(--font-footer-subheading-size-ideal),
-    var(--font-footer-subheading-size-max)
-  );
-
-  --font-subheading-size-min: 1.35rem;
-  --font-subheading-size-ideal: 1.75vw;
-  --font-subheading-size-max: 1.75rem;
-  --font-subheading-size: clamp(
-    var(--font-subheading-size-min),
-    var(--font-subheading-size-ideal),
-    var(--font-subheading-size-max)
-  );
-
-  --font-button-size-min: 1rem;
-  --font-button-size-ideal: 1.15vw;
-  --font-button-size-max: 1.25rem;
-  --font-button-size: clamp(
-    var(--font-button-size-min),
-    var(--font-button-size-ideal),
-    var(--font-button-size-max)
-  );
-
-  --line-height-min: 1.4;
-  --line-height-ideal: 2.5vw;
-  --line-height-max: 1.6;
-  --line-height: clamp(
-    var(--line-height-min),
-    var(--line-height-ideal),
-    var(--line-height-max)
-  );
-
-  --letter-spacing-min: 0.01em;
-  --letter-spacing-ideal: 0.05vw;
-  --letter-spacing-max: 0.05em;
-  --letter-spacing: clamp(
-    var(--letter-spacing-min),
-    var(--letter-spacing-ideal),
-    var(--letter-spacing-max)
-  );
-
-  --cta-icon-width-min: 1.5rem;
-  --cta-icon-width-ideal: 1.75vw;
-  --cta-icon-width-max: 2rem;
-  --cta-icon-width: clamp(
-    var(--cta-icon-width-min),
-    var(--cta-icon-width-ideal),
-    var(--cta-icon-width-max)
-  );
-
-  --cta-icon-height-min: 1.5rem;
-  --cta-icon-height-ideal: 1.75vw;
-  --cta-icon-height-max: 2rem;
-  --cta-icon-height: clamp(
-    var(--cta-icon-height-min),
-    var(--cta-icon-height-ideal),
-    var(--cta-icon-height-max)
-  );
-
-  --color-dark: #000;
-  --color-light: #fff;
   --color-primary: oklch(46.06% 0.088 116.1);
   --color-secondary: oklch(76.11% 0.076 138);
   --color-background: oklch(99.64% 0.007 132.8);
   --color-accent: oklch(78.612% 0.1191 63.361);
   --color-text: oklch(39.14% 0 0);
   --color-highlight: oklch(90% 0.02 134);
+
+  --text-shadow-headers: 0 2px 4px oklch(0% 0 0 / 0.15);
+  --text-shadow-body: 0 2px 4px oklch(0% 0 0 / 0.07);
+  --box-shadow: 0 2px 4px oklch(0% 0 0 / 0.1);
 }
 
 /*
@@ -164,7 +59,7 @@
 */
 
 img {
-  border-radius: 4px;
+  border-radius: var(--border-radius);
 }
 
 ul {
@@ -173,19 +68,35 @@ ul {
   margin: 0;
 }
 
+h1 {
+  font-size: var(--font-h1-size);
+}
+h2 {
+  font-size: var(--font-h2-size);
+}
+h3 {
+  font-size: var(--font-h3-size);
+}
+h4 {
+  font-size: var(--font-h4-size);
+}
+h5 {
+  font-size: var(--font-h5-size);
+}
+h6 {
+  font-size: var(--font-h6-size);
+}
+
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
+  color: var(--color-text);
   margin: 0;
   font-family: var(--font-serif);
-  text-shadow: 0 2px 4px oklch(0% 0 0 / 0.15);
-}
-
-h2 {
-  font-size: var(--font-subheading-size);
+  text-shadow: var(--text-shadow-headers);
 }
 
 p,
@@ -196,10 +107,18 @@ div {
   font-family: var(--font-sans);
   font-size: var(--font-body-size);
   line-height: var(--line-height);
-  color: var(--color-text);
+  color: var(--color-primary);
   margin: 0;
-  text-shadow: 0 2px 4px oklch(0% 0 0 / 0.07);
+  text-shadow: var(--text-shadow-body);
   font-weight: 400;
+}
+
+input,
+textarea {
+  font-family: var(--font-sans);
+  font-size: var(--font-body-size);
+  color: var(--color-text);
+  width: var(--input-width);
 }
 
 main {
@@ -207,11 +126,16 @@ main {
   background: var(--color-background);
 }
 
+body {
+  width: var(--app-width);
+  scroll-behavior: smooth;
+}
+
 details {
-  box-shadow: 0 2px 4px oklch(0% 0 0 / 0.1);
+  box-shadow: var(--box-shadow);
   margin-bottom: var(--gap);
   overflow: hidden;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
 
   summary {
     background: var(--color-secondary);
@@ -220,7 +144,7 @@ details {
     text-transform: uppercase;
     padding: 0.5rem 0.5rem;
     font-family: var(--font-serif);
-    color: var(--color-white);
+    color: var(--color-background);
     position: relative;
     list-style: none;
   }
@@ -239,12 +163,56 @@ details {
   summary::hover {
     background: var(--color-accent);
   }
+
+  div {
+    div {
+      h2 {
+        font-size: var(--font-h4-size);
+      }
+
+      ul:nth-child(2) {
+        padding-bottom: var(--padding-y);
+      }
+
+      p:nth-child(5) {
+        padding-top: var(--padding-y);
+        padding-left: var(--padding-x);
+      }
+    }
+  }
 }
 details summary::-webkit-details-marker {
   display: none;
 }
 details[open] summary:before {
   transform: rotate(90deg);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: var(--padding-y);
+
+  thead {
+    background: var(--color-highlight);
+    font-family: var(--font-serif);
+    font-size: var(--font-h4-size);
+  }
+
+  th,
+  td {
+    border: 1px solid var(--color-accent);
+    padding: var(--padding);
+    text-align: left;
+  }
+
+  th {
+    font-weight: 500;
+  }
+
+  td {
+    font-weight: 300;
+  }
 }
 
 .accessible-hidden {
@@ -289,7 +257,6 @@ details[open] summary:before {
   max-width: var(--app-width-max);
   position: sticky;
   top: 0;
-  border-bottom: 1px solid var(--color-dark);
   background: var(--color-accent);
   padding: var(--padding);
   z-index: 2;
@@ -298,7 +265,6 @@ details[open] summary:before {
   margin-right: auto;
   box-sizing: border-box;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  outline: 2px solid rebeccapurple;
 
   .main-header-content {
     align-items: center;
@@ -329,7 +295,7 @@ details[open] summary:before {
         letter-spacing: var(--letter-spacing);
         line-height: var(--line-height);
         text-decoration: none;
-        color: var(--color-white);
+        color: var(--color-background);
       }
     }
 
@@ -360,7 +326,7 @@ details[open] summary:before {
             font-family: var(--font-sans);
             font-size: var(--font-subheading-size);
             font-weight: 500;
-            color: var(--color-white);
+            color: var(--color-background);
             position: relative;
             text-decoration: none;
             width: fit-content;
@@ -371,10 +337,10 @@ details[open] summary:before {
             color: var(--color-primary);
           }
           .navlink-desktop.active:hover {
-            color: var(--color-white);
+            color: var(--color-background);
           }
           .navlink-desktop.active::after {
-            background-color: var(--color-white);
+            background-color: var(--color-background);
             transition: all 0.3s ease-in-out;
           }
           .navlink-desktop:hover {
@@ -539,7 +505,7 @@ details[open] summary:before {
       padding: var(--padding);
       text-align: center;
       text-transform: uppercase;
-      border-bottom: 1px solid var(--color-dark);
+      border-bottom: 1px solid var(--color-primary);
     }
 
     .footer-navlinks-mobile {
@@ -586,7 +552,6 @@ details[open] summary:before {
   width: fit-content;
   cursor: pointer;
   transition: color 300ms ease-in-out;
-  outline: 2px solid rebeccapurple;
 }
 
 .show-input-button:hover {
@@ -636,7 +601,10 @@ details[open] summary:before {
   gap: var(--gap);
   text-align: center;
   padding: var(--padding);
-  width: min(calc(var(--aside-width) - 2rem), calc(100% - 2rem));
+  width: min(
+    calc(var(--aside-width) - var(--padding-x)),
+    calc(100% - var(--padding-x))
+  );
 
   .icon-wrapper {
     padding: var(--padding-y) 0px;
@@ -650,11 +618,13 @@ details[open] summary:before {
       color: var(--color-text);
       border-radius: 100%;
       padding: 1rem;
-      background-color: var(--color-highlight);
+      background-color: var(--color-accent);
+      width: 64px;
 
       .icon {
         width: var(--cta-icon-width);
         height: var(--cta-icon-height);
+        color: var(--color-background);
       }
     }
   }
@@ -681,7 +651,7 @@ details[open] summary:before {
     padding: 0.75rem 1rem;
     text-decoration: none;
     text-transform: uppercase;
-    border-radius: 4px;
+    border-radius: var(--border-radius);
     transition: all 300ms ease-in-out;
   }
   .cart-empty-cta:hover {
@@ -734,16 +704,11 @@ details[open] summary:before {
 * --------------------------------------------------
 */
 .cart {
-  outline: 1px solid green;
-
   .cart-main {
-    outline: 2px solid blue;
   }
 }
 
 .cart-details {
-  height: 500px;
-
   .cart-lines {
     list-style: none;
     padding: 0;
@@ -757,19 +722,15 @@ details[open] summary:before {
   gap: var(--gap);
   border-bottom: 1px solid oklch(86.47% 0.013 234.6);
   font-family: var(--font-sans);
-  width: min(calc(var(--aside-width) - 2rem), calc(100% - 2rem));
+  width: min(
+    calc(var(--aside-width) - var(--padding-x)),
+    calc(100% - var(--padding-x))
+  );
 
-  .image-container {
-    width: clamp(75px, 20vw, 100px);
-    height: clamp(75px, 20vw, 100px);
-    overflow: hidden;
-    border-radius: 4px;
-
-    .image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+  .image {
+    width: 38%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .cart-line-item-details {
@@ -780,23 +741,11 @@ details[open] summary:before {
     height: 100%;
 
     h3 {
-      font-family: var(--font-serif);
-      font-size: clamp(
-        var(--font-subheading-min-size),
-        1.25vw,
-        var(--font-subheading-max-size)
-      );
       font-weight: 500;
-      margin: 0;
     }
 
     .product-options {
-      font-size: clamp(
-        var(--font-body-min-size),
-        1.5vw,
-        var(--font-body-max-size)
-      );
-      font-weight: 300;
+      font-size: var(--font-body-size);
     }
 
     .price-quantity {
@@ -805,11 +754,7 @@ details[open] summary:before {
       align-items: center;
 
       .product-price {
-        font-size: clamp(
-          var(--font-body-min-size),
-          1.25vw,
-          var(--font-body-max-size)
-        );
+        font-size: var(--font-body-size);
         font-weight: 300;
       }
 
@@ -817,11 +762,7 @@ details[open] summary:before {
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        font-size: clamp(
-          var(--font-body-min-size),
-          1.5vw,
-          var(--font-body-max-size)
-        );
+        font-size: var(--font-body-size);
         font-weight: 400;
 
         .minus-button,
@@ -832,7 +773,7 @@ details[open] summary:before {
           justify-content: center;
           background: none;
           border: 1px solid var(--color-text);
-          border-radius: 4px;
+          border-radius: var(--border-radius);
           width: 1.5rem;
           height: 1.5rem;
           padding: 0;
@@ -865,7 +806,7 @@ details[open] summary:before {
           width: 1.5rem;
           height: 1.5rem;
           border: 1px solid var(--color-text);
-          border-radius: 4px;
+          border-radius: var(--border-radius);
 
           .loader {
             width: 1rem;
@@ -877,6 +818,9 @@ details[open] summary:before {
       }
     }
   }
+}
+.cart-line-item-wrapper:last-child {
+  border-bottom: none;
 }
 
 /*
@@ -890,21 +834,21 @@ details[open] summary:before {
   justify-content: space-between;
   height: var(--cart-aside-summary-height);
   padding: 1rem;
-  border-top: 1px solid oklch(86.47% 0.013 234.6);
   font-family: var(--font-sans);
   gap: 2rem;
-  width: min(calc(var(--aside-width) - 2rem), calc(100% - 2rem));
+  width: min(
+    calc(var(--aside-width) - var(--padding-x)),
+    calc(100% - var(--padding-x))
+  );
 
   .subtotals {
+    border-top: 2px solid oklch(86.47% 0.013 234.6);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: clamp(
-      var(--font-body-min-size),
-      1.5vw,
-      var(--font-body-max-size)
-    );
+    font-size: var(--font-body-size);
     font-weight: 400;
+    padding-top: var(--padding-y);
 
     dt {
       font-weight: 300;
@@ -932,12 +876,8 @@ details[open] summary:before {
           width: 100%;
           padding: 0.5rem 1rem;
           border: 1px solid var(--color-text);
-          border-radius: 4px;
-          font-size: clamp(
-            var(--font-body-min-size),
-            1.5vw,
-            var(--font-body-max-size)
-          );
+          border-radius: var(--border-radius);
+          font-size: var(--font-body-size);
         }
         input[type='text']:focus {
           outline: 2px solid var(--color-primary);
@@ -970,15 +910,11 @@ details[open] summary:before {
           background: var(--color-primary);
           color: var(--color-background);
           font-family: var(--font-sans);
-          font-size: clamp(
-            var(--font-subheading-min-size),
-            1.15vw,
-            var(--font-subheading-max-size)
-          );
+          font-size: var(--font-button-size);
           font-weight: 600;
           padding: 0.25rem 0.5rem;
           text-decoration: none;
-          border-radius: 4px;
+          border-radius: var(--border-radius);
           transition: background 300ms ease-in-out;
         }
         button:hover {
@@ -1003,21 +939,13 @@ details[open] summary:before {
       border: none;
       padding: 0;
       cursor: pointer;
-      font-size: clamp(
-        var(--font-body-min-size),
-        1.5vw,
-        var(--font-body-max-size)
-      );
+      font-size: var(--font-body-size);
       color: var(--color-text);
     }
   }
 
   .extra-info {
-    font-size: clamp(
-      var(--font-body-min-size),
-      1.5vw,
-      var(--font-body-max-size)
-    );
+    font-size: var(--font-body-size);
     font-weight: 300;
     margin-top: 1rem;
 
@@ -1026,6 +954,7 @@ details[open] summary:before {
       align-items: start;
       justify-content: flex-start;
       gap: 0.5rem;
+      padding-bottom: var(--padding-y);
     }
   }
 }
@@ -1057,7 +986,7 @@ details[open] summary:before {
   padding: 0.45rem 0.75rem;
   text-decoration: none;
   text-transform: uppercase;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   transition: background 300ms ease-in-out;
   width: 100%;
   justify-content: center;
@@ -1125,7 +1054,7 @@ details[open] summary:before {
         flex: 1;
         padding: 0.5rem 1rem;
         border: none;
-        border-radius: 4px;
+        border-radius: var(--border-radius);
         font-size: var(--font-body-size);
       }
       input[type='email']:focus {
@@ -1145,7 +1074,7 @@ details[open] summary:before {
         font-weight: 600;
         padding: 0.35rem 0.75rem;
         text-decoration: none;
-        border-radius: 4px;
+        border-radius: var(--border-radius);
         transition: background 300ms ease-in-out;
         border: none;
       }
@@ -1321,6 +1250,212 @@ details[open] summary:before {
 
 /*
 * --------------------------------------------------
+* components/search
+* --------------------------------------------------
+*/
+
+body main .search {
+  padding: var(--padding);
+  width: 100%;
+  gap: var(--gap);
+
+  form {
+    padding-top: var(--padding-y);
+    width: clamp(300px, 50%, 600px);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    input {
+      padding: 0.5rem;
+      outline: 1px solid var(--color-primary);
+      border: none;
+      border-radius: var(--border-radius);
+      font-size: var(--font-body-size);
+      font-family: var(--font-sans);
+      resize: vertical;
+      transition: outline 300ms ease-in-out;
+    }
+    input:focus {
+      outline: 2px solid var(--color-secondary);
+    }
+
+    button {
+      cursor: pointer;
+      background: var(--color-primary);
+      color: var(--color-background);
+      font-family: var(--font-sans);
+      font-size: var(--font-button-size);
+      font-weight: 600;
+      padding: 0.45rem 0.75rem;
+      text-decoration: none;
+      text-transform: uppercase;
+      border-radius: var(--border-radius);
+      transition: background 300ms ease-in-out;
+      border: none;
+    }
+    button:hover {
+      background: var(--color-accent);
+    }
+  }
+
+  div {
+    .search-result {
+      outline: 1px solid red;
+
+      h2 {
+        padding: var(--padding-y) 0px;
+      }
+
+      div {
+        div {
+          display: flex;
+          flex-direction: column;
+          gap: var(--gap);
+
+          .search-results-item {
+            a {
+              display: flex;
+              align-items: center;
+              gap: var(--gap);
+
+              img {
+                width: clamp(50px, 10vw, 75px);
+                height: clamp(50px, 10vw, 75px);
+                aspect-ratio: 1/1;
+                object-fit: cover;
+              }
+
+              div {
+                margin-top: -1rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: baseline;
+
+                p {
+                  font-family: var(--font-serif);
+                  font-size: var(--font-h5-size);
+                  font-weight: 500;
+                }
+                small {
+                  div {
+                    font-size: var(--font-body-size);
+                    font-weight: 300;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  p {
+    padding-top: var(--padding-y);
+  }
+}
+
+aside main {
+  width: min(
+    calc(var(--aside-width) - var(--padding-x)),
+    calc(100% - var(--padding-x))
+  );
+
+  .predictive-search {
+    width: 100%;
+
+    .predictive-search-form {
+      width: 100%;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem;
+
+      input {
+        width: var(--input-width);
+        padding: 0.5rem;
+        outline: 1px solid var(--color-primary);
+        border: none;
+        border-radius: var(--border-radius);
+        font-size: var(--font-body-size);
+        font-family: var(--font-sans);
+        resize: vertical;
+        transition: outline 300ms ease-in-out;
+      }
+      input:focus {
+        outline: 2px solid var(--color-secondary);
+      }
+
+      button {
+        cursor: pointer;
+        background: var(--color-primary);
+        color: var(--color-background);
+        font-family: var(--font-sans);
+        font-size: var(--font-button-size);
+        font-weight: 600;
+        padding: 0.45rem 0.75rem;
+        text-decoration: none;
+        text-transform: uppercase;
+        border-radius: var(--border-radius);
+        transition: background 300ms ease-in-out;
+        border: none;
+        margin-top: 1rem;
+      }
+
+      button:hover {
+        background: var(--color-accent);
+      }
+    }
+
+    .predictive-search-result {
+      width: 100%;
+      padding: var(--padding-y) 0px;
+
+      h5 {
+        font-size: var(--font-h2-size);
+      }
+
+      ul {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap);
+        padding: var(--padding-y) 0px;
+
+        li {
+          a {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--gap);
+
+            img {
+              width: clamp(50px, 10vw, 75px);
+              height: clamp(50px, 10vw, 75px);
+              aspect-ratio: 1/1;
+              object-fit: cover;
+            }
+
+            div {
+              p {
+                margin-top: -0.25rem;
+                font-family: var(--font-serif);
+                font-size: var(--font-h5-size);
+                font-weight: 500;
+              }
+              small {
+                font-size: var(--font-body-size);
+                font-weight: 300;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/*
+* --------------------------------------------------
 * components/Aside
 * --------------------------------------------------
 */
@@ -1328,10 +1463,12 @@ details[open] summary:before {
 .overlay.expanded {
   height: 100vh;
   transform: translateX(calc(-1 * var(--aside-width)));
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 .overlay {
-  outline: 2px solid salmon;
   background: var(--color-background);
   box-shadow: 0 0 50px oklch(0% 0 0 / 0.3);
   width: min(var(--aside-width), 100vw);
@@ -1348,7 +1485,7 @@ details[open] summary:before {
     font-size: var(--font-button-size);
     font-weight: 600;
     text-decoration: none;
-    border-radius: 4px;
+    border-radius: var(--border-radius);
     border: none;
   }
   button:hover {
@@ -1365,9 +1502,13 @@ details[open] summary:before {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid var(--color-dark);
-      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--color-accent);
+      padding: var(--padding-y) 0px;
       margin-bottom: 1rem;
+      position: sticky;
+      top: 0;
+      background: var(--color-background);
+      width: 100%;
 
       h3 {
         margin: 0;
@@ -1412,117 +1553,6 @@ details[open] summary:before {
     }
   }
 }
-/*  */
-/*  */
-/* @media (max-width: 45em) {
-  html:has(.overlay.expanded) {
-    overflow: hidden;
-  }
-}
-
-aside {
-  background: var(--color-light);
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
-  height: 100vh;
-  width: min(var(--aside-width), 100vw);
-  position: fixed;
-  right: calc(-1 * var(--aside-width));
-  top: 0;
-  transition: transform 300ms ease-in-out;
-}
-
-aside header {
-  align-items: center;
-  border-bottom: 1px solid var(--color-dark);
-  display: flex;
-  height: var(--header-height);
-  justify-content: space-between;
-  padding: 0 20px;
-}
-
-aside header h3 {
-  margin: 0;
-}
-
-aside header .close {
-  font-weight: bold;
-  opacity: 0.8;
-  text-decoration: none;
-  transition: all 300ms ease-in-out;
-  width: 20px;
-}
-
-aside header .close:hover {
-  opacity: 1;
-}
-
-aside header h2 {
-  margin-bottom: 0.6rem;
-  margin-top: 0;
-}
-
-aside main {
-  margin: 1rem;
-}
-
-aside p {
-  margin: 0 0 0.25rem;
-}
-
-aside p:last-child {
-  margin: 0;
-}
-
-aside li {
-  margin-bottom: 0.125rem;
-}
-
-.overlay {
-  background: rgba(0, 0, 0, 0.2);
-  bottom: 0;
-  left: 0;
-  opacity: 0;
-  pointer-events: none;
-  position: fixed;
-  right: 0;
-  top: 0;
-  transition: all 400ms ease-in-out;
-  visibility: hidden;
-  z-index: 10;
-}
-
-.overlay .close-outside {
-  background: transparent;
-  border: none;
-  color: transparent;
-  height: 100%;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: calc(100% - var(--aside-width));
-}
-
-.overlay .light {
-  background: rgba(255, 255, 255, 0.5);
-}
-
-.overlay .cancel {
-  cursor: default;
-  height: 100%;
-  position: absolute;
-  width: 100%;
-}
-
-.overlay.expanded {
-  opacity: 1;
-  pointer-events: auto;
-  visibility: visible;
-}
-
-
-.overlay.expanded aside {
-  transform: translateX(calc(var(--aside-width) * -1));
-} */
 
 /*
 * --------------------------------------------------
@@ -1584,43 +1614,17 @@ aside li {
       flex-direction: column;
       gap: var(--gap);
       font-family: var(--font-sans);
-      font-size: clamp(
-        var(--font-body-min-size),
-        1.5vw,
-        var(--font-body-max-size)
-      );
+      font-size: var(--font-body-size);
       font-weight: 300;
       width: clamp(300px, 30vw, 600px);
 
       h2 {
-        font-family: var(--font-serif);
-        font-size: clamp(
-          var(--font-heading-min-size),
-          2.5vw,
-          var(--font-heading-max-size)
-        );
         font-weight: 500;
-        margin-top: 0;
-        color: var(--color-text);
-      }
-
-      p {
-        font-size: clamp(
-          var(--font-body-min-size),
-          1.5vw,
-          var(--font-body-max-size)
-        );
-        font-weight: 300;
-        color: var(--color-text);
       }
 
       .learn-more-cta {
         font-family: var(--font-serif);
-        font-size: clamp(
-          var(--font-subheading-min-size),
-          1.15vw,
-          var(--font-subheading-max-size)
-        );
+        font-size: var(--font-subheading-size);
         font-weight: 500;
         color: var(--color-primary);
         text-decoration: none;
@@ -1643,17 +1647,13 @@ aside li {
     width: 100%;
     height: 75vh;
     overflow: hidden;
-    background: var(--color-dark);
+    background: var(--color-primary);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-light);
+    color: var(--color-background);
     font-family: var(--font-serif);
-    font-size: clamp(
-      var(--font-heading-min-size),
-      5vw,
-      var(--font-heading-max-size)
-    );
+    font-size: var(--font-heading-size);
     text-align: center;
     padding: 0 1rem;
 
@@ -1674,41 +1674,21 @@ aside li {
       max-width: 800px;
 
       h1 {
-        margin: 0;
-        line-height: 1.2;
-        font-size: clamp(
-          var(--font-heading-min-size),
-          5vw,
-          var(--font-heading-max-size)
-        );
-      }
-
-      p {
-        margin-top: 1rem;
-        font-size: clamp(
-          var(--font-body-min-size),
-          2.5vw,
-          var(--font-body-max-size)
-        );
-        font-weight: 300;
+        font-size: var(--font-heading-size);
       }
 
       .shop-now-link {
         display: inline-block;
         margin-top: 1.5rem;
         background: var(--color-primary);
-        color: var(--color-light);
+        color: var(--color-background);
         font-family: var(--font-sans);
-        font-size: clamp(
-          var(--font-subheading-min-size),
-          1.15vw,
-          var(--font-subheading-max-size)
-        );
+        font-size: var(--font-button-size);
         font-weight: 600;
         padding: 0.75rem 1.5rem;
         text-decoration: none;
         text-transform: uppercase;
-        border-radius: 4px;
+        border-radius: var(--border-radius);
         transition: background 300ms ease-in-out;
       }
     }
@@ -1722,16 +1702,9 @@ aside li {
 
     .recommended-products {
       h2 {
-        font-family: var(--font-serif);
-        font-size: clamp(
-          var(--font-heading-min-size),
-          2.5vw,
-          var(--font-heading-max-size)
-        );
         font-weight: 500;
         text-align: center;
         margin-bottom: 2rem;
-        color: var(--color-text);
       }
 
       .products-grid {
@@ -1765,14 +1738,10 @@ aside li {
 
     blockquote {
       font-family: var(--font-serif);
-      font-size: clamp(
-        var(--font-body-min-size),
-        1.5vw,
-        var(--font-body-max-size)
-      );
+      font-size: var(--font-subheading-size);
       font-style: italic;
       font-weight: 300;
-      color: var(--color-light);
+      color: var(--color-background);
       max-width: 800px;
       text-align: center;
       margin: 0;
@@ -1780,13 +1749,9 @@ aside li {
 
     cite {
       font-family: var(--font-sans);
-      font-size: clamp(
-        var(--font-subheading-min-size),
-        1.15vw,
-        var(--font-subheading-max-size)
-      );
+      font-size: var(--font-body-size);
       font-weight: 500;
-      color: var(--color-light);
+      color: var(--color-background);
     }
   }
 }
@@ -1806,7 +1771,7 @@ aside li {
   .product-item-image-container {
     width: 100%;
     overflow: hidden;
-    border-radius: 4px;
+    border-radius: var(--border-radius);
     margin-bottom: 1rem;
     position: relative;
 
@@ -1821,7 +1786,7 @@ aside li {
       height: 100%;
       object-fit: cover;
       transition: opacity 300ms ease-in-out;
-      color: var(--color-white);
+      color: var(--color-background);
     }
     .primary-image:hover {
       opacity: 0;
@@ -1856,7 +1821,7 @@ aside li {
       left: 0;
 
       p {
-        color: var(--color-light);
+        color: var(--color-background);
       }
     }
   }
@@ -1874,23 +1839,12 @@ aside li {
     justify-content: center;
 
     h4 {
-      font-family: var(--font-serif);
-      font-size: clamp(
-        var(--font-subheading-min-size),
-        1.25vw,
-        var(--font-subheading-max-size)
-      );
       font-weight: 500;
       margin: 0.5rem 0;
-      color: var(--color-text);
     }
 
     small {
-      font-size: clamp(
-        var(--font-body-min-size),
-        1.5vw,
-        var(--font-body-max-size)
-      );
+      font-size: var(--font-body-size);
       font-weight: 300;
       color: var(--color-text);
     }
@@ -1932,7 +1886,7 @@ main {
             max-width: 100%;
             width: 100%;
             height: auto;
-            border-radius: 4px;
+            border-radius: var(--border-radius);
             overflow: hidden;
             transition: all 300ms ease-in-out;
           }
@@ -1950,7 +1904,7 @@ main {
               background: none;
               cursor: pointer;
               border: 2px solid transparent;
-              border-radius: 4px;
+              border-radius: var(--border-radius);
               transition: border 300ms ease-in-out;
               transition: opacity 300ms ease-in-out;
               width: clamp(50px, 15vw, 100px);
@@ -1958,7 +1912,7 @@ main {
             }
             .thumbnail-button.selected {
               border: 2px solid var(--color-primary);
-              border-radius: 4px;
+              border-radius: var(--border-radius);
               opacity: 1;
             }
           }
@@ -1969,10 +1923,6 @@ main {
         display: flex;
         flex-direction: column;
         gap: 1rem;
-
-        h1 {
-          font-size: var(--font-heading-size);
-        }
 
         .product-price {
           font-size: var(--font-subheading-size);
@@ -2020,10 +1970,10 @@ main {
 
           .main-image {
             min-width: 300px;
-            max-width: 600px;
+            max-width: 768px;
             width: 100%;
             height: auto;
-            border-radius: 4px;
+            border-radius: var(--border-radius);
             overflow: hidden;
             transition: all 300ms ease-in-out;
           }
@@ -2041,7 +1991,7 @@ main {
               background: none;
               cursor: pointer;
               border: 2px solid transparent;
-              border-radius: 4px;
+              border-radius: var(--border-radius);
               transition: border 300ms ease-in-out;
               transition: opacity 300ms ease-in-out;
               width: clamp(50px, 15vw, 100px);
@@ -2049,7 +1999,7 @@ main {
             }
             .thumbnail-button.selected {
               border: 2px solid var(--color-primary);
-              border-radius: 4px;
+              border-radius: var(--border-radius);
               opacity: 1;
             }
           }
@@ -2061,10 +2011,6 @@ main {
         flex-direction: column;
         gap: 1rem;
         flex: 1;
-
-        h1 {
-          font-size: var(--font-heading-size);
-        }
 
         .product-price {
           font-size: var(--font-subheading-size);
@@ -2136,7 +2082,6 @@ main {
         width: 100%;
         div {
           padding: var(--padding);
-          outline: 1px solid olive;
           font-weight: 300;
           line-height: var(--line-height);
           width: 100%;
@@ -2157,7 +2102,6 @@ main {
       div {
         div {
           padding: var(--padding-y) 0px;
-          outline: 1px solid olive;
           font-weight: 300;
           line-height: var(--line-height);
           width: 100%;
@@ -2206,22 +2150,52 @@ main {
   margin-left: auto;
   margin-right: auto;
 
+  h1 {
+    padding: var(--padding);
+  }
+
+  .collection-description {
+    padding: var(--padding);
+  }
+
+  div {
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      padding: var(--padding);
+
+      .product-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        .product-item-image-container {
+        }
+
+        .product-information {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+  }
+
   .hero-section {
     position: relative;
     width: 100%;
     height: 40vh;
     overflow: hidden;
-    background: var(--color-dark);
+    background: var(--color-primary);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-light);
+    color: var(--color-background);
     font-family: var(--font-serif);
-    font-size: clamp(
-      var(--font-heading-min-size),
-      4vw,
-      var(--font-heading-max-size)
-    );
+    font-size: var(--font-heading-size);
     text-align: center;
     padding: 0 1rem;
 
@@ -2237,15 +2211,13 @@ main {
 
     .hero-text {
       position: relative;
-      font-weight: 500;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
       max-width: 800px;
 
       h1 {
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         color: var(--color-background);
-        margin: 0;
         line-height: var(--line-height);
-        font-size: var(--font-heading-size);
+        font-weight: 500;
       }
 
       p {
@@ -2277,27 +2249,6 @@ main {
         font-weight: 300;
       }
     }
-
-    .filter-sort-buttons {
-      display: flex;
-      gap: var(--gap);
-
-      button {
-        cursor: pointer;
-        background: var(--color-primary);
-        color: var(--color-background);
-        font-family: var(--font-sans);
-        font-size: var(--font-button-size);
-        font-weight: 600;
-        padding: 0.1rem 1rem;
-        text-decoration: none;
-        border-radius: 4px;
-        transition: background 300ms ease-in-out;
-      }
-      button:hover {
-        background: var(--color-accent);
-      }
-    }
   }
 
   .products-grid {
@@ -2306,6 +2257,10 @@ main {
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 2rem;
       padding: var(--padding);
+    }
+
+    span {
+      padding-left: var(--padding-x);
     }
   }
 
@@ -2366,11 +2321,7 @@ main {
     width: 100%;
 
     h1 {
-      font-family: var(--font-serif);
-      font-size: var(--font-heading-size);
-      font-weight: 500;
       padding-bottom: 1rem;
-      color: var(--color-primary);
     }
 
     .subtitle {
@@ -2393,16 +2344,33 @@ main {
     .page-body {
       padding-bottom: var(--padding-y);
 
+      .care-guide-page {
+        p:nth-child(1),
+        p:nth-child(2),
+        p:nth-child(3),
+        p:nth-child(4) {
+          padding-top: 0.5rem;
+        }
+
+        h2 {
+          padding: var(--padding-y) 0px;
+        }
+      }
+
+      .our-craft-content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: var(--gap);
+      }
+
       .about-us-content {
         h2 {
-          font-size: var(--font-subheading-size);
-          font-weight: 500;
           padding: var(--padding-y) 0px;
         }
 
         h3 {
-          font-size: var(--font-body-size);
-          font-weight: 300;
           padding: var(--padding);
         }
 
@@ -2459,7 +2427,7 @@ main {
             padding: 0.5rem;
             outline: 1px solid var(--color-primary);
             border: none;
-            border-radius: 4px;
+            border-radius: var(--border-radius);
             font-size: var(--font-body-size);
             font-family: var(--font-sans);
             resize: vertical;
@@ -2480,7 +2448,7 @@ main {
             padding: 0.45rem 0.75rem;
             text-decoration: none;
             text-transform: uppercase;
-            border-radius: 4px;
+            border-radius: var(--border-radius);
             transition: background 300ms ease-in-out;
             border: none;
             place-self: center;

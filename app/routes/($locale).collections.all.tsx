@@ -82,11 +82,6 @@ export default function Collection() {
           <h2>The Collection</h2>
           <p>Showing {products.nodes.length} nurtured plants</p>
         </div>
-
-        <div className="filter-sort-buttons">
-          <button>Filter</button>
-          <button>Sort</button>
-        </div>
       </section>
 
       {/* products grid */}
