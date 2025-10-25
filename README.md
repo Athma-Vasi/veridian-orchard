@@ -1,6 +1,6 @@
 # 🌿 Veridian Orchard: E-Commerce Platform
 
-A high-performance, fully custom e-commerce solution built on the Shopify platform for a specialty houseplant and gardening supply retailer. This project demonstrates advanced Shopify Theme Development, custom Front-End Engineering, and Back-End integration using the native Shopify Liquid and API ecosystem.
+A high-performance, fully custom e-commerce solution built on the Shopify platform for a specialty houseplant and gardening supply retailer. This project demonstrates advanced Shopify Theme Development, custom Front-End Engineering, and Back-End integration using the native Shopify Hydrogen & Oxygen ecosystem.
 
 ## 🛠️ Tech Stack
 
