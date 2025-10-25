@@ -9,7 +9,7 @@ A high-performance, fully custom e-commerce solution built on the Shopify platfo
 | Front-end Framework  | Shopify Hydrogen (React framework with Vite)   |
 | Platform Integration | Shopify Storefront API (for all data fetching) |
 | Styling              | Latest native CSS styling.                     |
-| Languages            | TypeScript, JavaScript (ES6+), HTML5, CSS3     |
+| Languages            | TypeScript, HTML5, CSS3                        |
 
 ## Key Architectural Decisions and Rationale
 

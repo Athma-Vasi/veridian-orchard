@@ -122,7 +122,7 @@ export default function Collection() {
             maximize the vitality of our plants. Join us in our mission to grow
             a greener tomorrow, one seedling at a time.
           </p>
-          <Link to="/about" className="learn-more-cta">
+          <Link to="/pages/about-us" className="learn-more-cta">
             Learn More ➔
           </Link>
         </div>

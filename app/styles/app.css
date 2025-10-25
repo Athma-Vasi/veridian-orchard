@@ -1714,7 +1714,7 @@ aside main {
       font-family: var(--font-sans);
       font-size: var(--font-body-size);
       font-weight: 300;
-      width: clamp(300px, 30vw, 600px);
+      width: clamp(300px, 30vw, 768px);
 
       h2 {
         font-weight: 500;
