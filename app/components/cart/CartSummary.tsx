@@ -47,15 +47,15 @@ export function CartSummary({cart, layout}: CartSummaryProps) {
 
       {/* extra info */}
       <div className="extra-info">
-        <p>
-          <Gift />
-          Complimentary gift wrapping available
-        </p>
+        <div>
+          <Gift className="icon" />
+          <span>Complimentary gift wrapping available</span>
+        </div>
 
-        <p>
-          <CreditCard />
-          Secure checkout powered by Shopify
-        </p>
+        <div>
+          <CreditCard className="icon" />
+          <span>Secure checkout powered by Shopify</span>
+        </div>
       </div>
     </div>
   );
