@@ -2,6 +2,8 @@
 
 A high-performance, fully custom e-commerce solution built on the Shopify platform for a specialty houseplant and gardening supply retailer. This project demonstrates advanced Shopify Theme Development, custom Front-End Engineering, and Back-End integration using the native Shopify Hydrogen & Oxygen ecosystem.
 
+[Click-Through](https://youtu.be/W7aLh1UQ9QY)
+
 ## 🛠️ Tech Stack
 
 | Category             | Tools & Technologies                           |
